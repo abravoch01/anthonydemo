@@ -10,6 +10,9 @@
     p { font-size: 1.2rem; }
     .boton-comenzar { margin-top: 32px; padding: 14px 36px; font-size: 1.1rem; font-family: inherit; color: #ffffff; background: #1e6fd9; border: none; border-radius: 8px; cursor: pointer; }
     .boton-comenzar:hover { background: #1858b0; }
+    table { margin: 32px auto 0; border-collapse: collapse; font-size: 1rem; text-align: left; background: #ffffff; }
+    th, td { padding: 10px 14px; border-bottom: 1px solid #d5dde6; }
+    th { background: #051c2c; color: #ffffff; }
   </style>
 </head>
 <body>
@@ -17,6 +20,27 @@
   <p>Hackathon de Salud Mental con IA · UCV</p>
   <p>Pídele a Claude que cambie esta página.</p>
   <p id="fecha-actual"></p>
+  <table>
+    <thead>
+      <tr><th>Nombre</th><th>País</th><th>Época</th><th>Aporte principal</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Wilhelm Wundt</td><td>Alemania</td><td>1832–1920</td><td>Fundó el primer laboratorio de psicología experimental (1879)</td></tr>
+      <tr><td>William James</td><td>Estados Unidos</td><td>1842–1910</td><td>Funcionalismo; <i>Principles of Psychology</i></td></tr>
+      <tr><td>Sigmund Freud</td><td>Austria</td><td>1856–1939</td><td>Psicoanálisis; inconsciente, complejo de Edipo</td></tr>
+      <tr><td>Iván Pavlov</td><td>Rusia</td><td>1849–1936</td><td>Condicionamiento clásico (fisiólogo, con gran influencia en psicología)</td></tr>
+      <tr><td>Carl Jung</td><td>Suiza</td><td>1875–1961</td><td>Psicología analítica; arquetipos e inconsciente colectivo</td></tr>
+      <tr><td>Jean Piaget</td><td>Suiza</td><td>1896–1980</td><td>Etapas del desarrollo cognitivo infantil</td></tr>
+      <tr><td>Lev Vygotsky</td><td>Rusia</td><td>1896–1934</td><td>Desarrollo sociocultural; zona de desarrollo próximo</td></tr>
+      <tr><td>Abraham Maslow</td><td>Estados Unidos</td><td>1908–1970</td><td>Pirámide de necesidades; psicología humanista</td></tr>
+      <tr><td>Carl Rogers</td><td>Estados Unidos</td><td>1902–1987</td><td>Terapia centrada en el cliente</td></tr>
+      <tr><td>B. F. Skinner</td><td>Estados Unidos</td><td>1904–1990</td><td>Condicionamiento operante; conductismo radical</td></tr>
+      <tr><td>Viktor Frankl</td><td>Austria</td><td>1905–1997</td><td>Logoterapia; búsqueda de sentido (psiquiatra)</td></tr>
+      <tr><td>Aaron Beck</td><td>Estados Unidos</td><td>1921–2021</td><td>Terapia cognitivo-conductual</td></tr>
+      <tr><td>Albert Bandura</td><td>Canadá / EE. UU.</td><td>1925–2021</td><td>Aprendizaje social y autoeficacia</td></tr>
+      <tr><td>Daniel Kahneman</td><td>Israel / EE. UU.</td><td>1934–2024</td><td>Sesgos cognitivos y economía conductual; Nobel de Economía 2002</td></tr>
+    </tbody>
+  </table>
   <button class="boton-comenzar">Comenzar</button>
   <script>
     document.getElementById('fecha-actual').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
