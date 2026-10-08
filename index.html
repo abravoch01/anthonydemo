@@ -1,58 +1,64 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SendaSerena | Bienestar, Autorregulación y Nutrición Consciente</title>
-    <!-- Tailwind CSS CDN -->
+    <title>SendaSerena - Bienestar Integral & Nutrición Consciente</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        sage: {
-                            50: '#f4f7f4',
-                            100: '#e3ebe3',
-                            200: '#c7d7c7',
-                            300: '#a3be1a3',
-                            500: '#628a67',
-                            600: '#4c7051',
-                            700: '#3d5941',
-                            800: '#2d4231',
+                        serene: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#042f2e',
                         },
                         calm: {
-                            50: '#f0f7ff',
-                            100: '#e0effe',
-                            200: '#bae0fd',
-                            500: '#389df8',
-                            600: '#1d7cd6',
-                            800: '#1e40af',
-                        },
-                        cream: {
-                            50: '#fdfcf7',
-                            100: '#f9f6ec',
-                            200: '#f3ebd8',
-                            300: '#e9d9b8',
-                        },
-                        lavender: {
-                            50: '#f8f5ff',
-                            100: '#f0e8ff',
-                            200: '#e1d0ff',
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
                             500: '#8b5cf6',
-                            700: '#6d28d9',
+                            600: '#7c3aed',
+                            800: '#5b21b6',
+                            950: '#2e1065',
                         }
                     },
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
                         display: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(45, 212, 191, 0.3)' },
+                            '100%': { boxShadow: '0 0 30px rgba(45, 212, 191, 0.8)' }
+                        }
                     }
                 }
             }
@@ -60,823 +66,1462 @@
     </script>
     <style>
         body {
-            background-color: #fdfcf7;
-            color: #2c3e35;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
-
-        /* Breathing Circle Pulse Animation */
-        @keyframes breathIn {
-            0% { transform: scale(1); opacity: 0.7; box-shadow: 0 0 20px rgba(98, 138, 103, 0.2); }
-            100% { transform: scale(1.65); opacity: 1; box-shadow: 0 0 60px rgba(98, 138, 103, 0.6); }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        @keyframes breathHold {
-            0%, 100% { transform: scale(1.65); opacity: 1; box-shadow: 0 0 70px rgba(56, 157, 248, 0.7); }
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
-        @keyframes breathOut {
-            0% { transform: scale(1.65); opacity: 1; box-shadow: 0 0 60px rgba(98, 138, 103, 0.6); }
-            100% { transform: scale(1); opacity: 0.7; box-shadow: 0 0 20px rgba(98, 138, 103, 0.2); }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .anim-inhale { animation: breathIn 4s ease-in-out forwards; }
-        .anim-hold-7 { animation: breathHold 7s ease-in-out infinite; }
-        .anim-hold-4 { animation: breathHold 4s ease-in-out infinite; }
-        .anim-exhale-8 { animation: breathOut 8s ease-in-out forwards; }
-        .anim-exhale-4 { animation: breathOut 4s ease-in-out forwards; }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .light .glass-card {
+            background: rgba(240, 253, 250, 0.7);
+            border: 1px solid rgba(20, 184, 166, 0.15);
         }
-        ::-webkit-scrollbar-track {
-            background: #f1ede4;
+        .equalizer-bar {
+            animation: bounceHeight 1.2s ease-in-out infinite alternate;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #a3be1a3;
-            border-radius: 999px;
+        @keyframes bounceHeight {
+            0% { height: 15%; }
+            100% { height: 100%; }
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #628a67;
+        /* Canvas custom styling */
+        canvas {
+            touch-action: none;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-sage-200 selection:text-sage-800">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col transition-colors duration-300 relative overflow-x-hidden">
 
-    <!-- Navigation Bar -->
-    <header class="sticky top-0 z-40 bg-cream-50/90 backdrop-blur-md border-b border-sage-100/80 transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-sage-500 to-calm-500 flex items-center justify-center text-white shadow-md shadow-sage-500/20">
-                    <i class="fa-solid font-bold fa-spa text-xl"></i>
+    <!-- Ambient Background Lighting Effect -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-serene-500/15 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse-slow"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-calm-500/15 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse-slow"></div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-white/10 px-4 lg:px-8 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-serene-500 to-calm-500 flex items-center justify-center text-white shadow-lg shadow-serene-500/20 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid font-bold fa-leaf text-xl"></i>
                 </div>
                 <div>
-                    <span class="font-display font-bold text-xl tracking-tight text-sage-800 block leading-none">SendaSerena</span>
-                    <span class="text-xs text-sage-600 font-medium">Bienestar & Salud Integral</span>
+                    <span class="font-display font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-serene-300 via-teal-200 to-calm-300">SendaSerena</span>
+                    <span class="block text-[10px] uppercase tracking-wider text-serene-400 font-semibold">Bienestar & Nutrición</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center gap-1 bg-sage-50/80 p-1.5 rounded-full border border-sage-200/60 shadow-inner">
-                <a href="#pilares" class="px-4 py-2 rounded-full text-xs font-semibold text-sage-700 hover:bg-white hover:shadow-sm transition-all">Pilares</a>
-                <a href="#deteccion" class="px-4 py-2 rounded-full text-xs font-semibold text-sage-700 hover:bg-white hover:shadow-sm transition-all">Detección</a>
-                <a href="#autorregulacion" class="px-4 py-2 rounded-full text-xs font-semibold text-sage-700 hover:bg-white hover:shadow-sm transition-all">Respiración</a>
-                <a href="#emociones" class="px-4 py-2 rounded-full text-xs font-semibold text-sage-700 hover:bg-white hover:shadow-sm transition-all">Emociones</a>
-                <a href="#nutricion" class="px-4 py-2 rounded-full text-xs font-semibold text-sage-700 hover:bg-white hover:shadow-sm transition-all">Nutrición</a>
-                <a href="#relajacion" class="px-4 py-2 rounded-full text-xs font-semibold text-sage-700 hover:bg-white hover:shadow-sm transition-all">Sonidos & Videos</a>
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium">
+                <a href="#ia-multimodal" class="px-3 py-2 rounded-lg hover:bg-white/10 text-slate-300 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-robot text-serene-400"></i> Serena IA
+                </a>
+                <a href="#video-guias" class="px-3 py-2 rounded-lg hover:bg-white/10 text-slate-300 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-circle-play text-calm-400"></i> Videos Interactivos
+                </a>
+                <a href="#ejercicios" class="px-3 py-2 rounded-lg hover:bg-white/10 text-slate-300 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-wind text-teal-400"></i> Respiración & Audio
+                </a>
+                <a href="#plato-mindful" class="px-3 py-2 rounded-lg hover:bg-white/10 text-slate-300 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-utensils text-emerald-400"></i> Plato Mindful
+                </a>
+                <a href="#deteccion-temprana" class="px-3 py-2 rounded-lg hover:bg-white/10 text-slate-300 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-heart-pulse text-rose-400"></i> Test Detección
+                </a>
             </nav>
 
+            <!-- Actions -->
             <div class="flex items-center gap-3">
-                <a href="#chatbot" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-sage-600 to-sage-700 text-white font-medium text-xs sm:text-sm hover:shadow-lg hover:shadow-sage-600/30 active:scale-95 transition-all">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>Consejero IA</span>
-                </a>
-                <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl bg-sage-100 text-sage-700 hover:bg-sage-200">
-                    <i class="fa-solid fa-bars text-lg"></i>
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition" title="Cambiar Tema">
+                    <i class="fa-solid fa-moon text-lg" id="themeIcon"></i>
+                </button>
+                <button onclick="openCallModal()" class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-serene-500 to-calm-600 hover:from-serene-400 hover:to-calm-500 text-white font-semibold text-sm shadow-lg shadow-serene-500/25 transition active:scale-95">
+                    <i class="fa-solid fa-phone-volume animate-bounce"></i> Llamada IA
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-cream-50 border-b border-sage-200 px-6 py-4 space-y-3">
-            <a href="#pilares" class="block text-sm font-medium text-sage-700 py-1">Pilares Fundamentales</a>
-            <a href="#deteccion" class="block text-sm font-medium text-sage-700 py-1">Detección Temprana</a>
-            <a href="#autorregulacion" class="block text-sm font-medium text-sage-700 py-1">Autorregulación & Respiración</a>
-            <a href="#emociones" class="block text-sm font-medium text-sage-700 py-1">Mood Tracker</a>
-            <a href="#nutricion" class="block text-sm font-medium text-sage-700 py-1">Alimentación Consciente</a>
-            <a href="#relajacion" class="block text-sm font-medium text-sage-700 py-1">Audio & Galería</a>
-        </div>
     </header>
 
-    <main class="flex-grow">
-        <!-- Hero Section -->
-        <section class="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-cream-100 via-cream-50 to-cream-50">
-            <div class="absolute -top-24 -right-24 w-96 h-96 bg-sage-200/40 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute top-1/2 -left-24 w-80 h-80 bg-calm-200/30 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- HERO SECTION -->
+    <section class="relative py-12 lg:py-20 px-4 max-w-7xl mx-auto text-center">
+        <!-- Prominent Obligatory Phrase Banner -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-serene-500/10 border border-serene-500/30 text-serene-300 text-xs sm:text-sm font-medium mb-6 animate-float">
+            <span class="w-2 h-2 rounded-full bg-serene-400 animate-ping"></span>
+            <span>Pilares SendaSerena: Detección temprana, autorregulación, autocuidado y gestión de emociones.</span>
+        </div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center max-w-3xl mx-auto space-y-6">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage-100 text-sage-800 text-xs font-semibold uppercase tracking-wider border border-sage-200">
-                        <i class="fa-solid fa-leaf text-sage-600"></i>
-                        <span>Enfoque Holístico de Salud</span>
-                    </div>
-                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-sage-800 leading-tight">
-                        Tu refugio para la mente, el cuerpo y tus emociones
-                    </h1>
-                    <p class="text-base sm:text-lg text-sage-600 font-normal leading-relaxed">
-                        Aprende a escuchar a tu cuerpo, encontrar la calma en momentos de tensión y nutrirte conscientemente con herramientas interactivas respaldadas por la ciencia del bienestar.
-                    </p>
-                    
-                    <div class="flex flex-wrap justify-center gap-4 pt-4">
-                        <a href="#autorregulacion" class="px-6 py-3.5 rounded-2xl bg-sage-600 text-white font-semibold text-sm hover:bg-sage-700 shadow-md shadow-sage-600/20 transition-all flex items-center gap-2">
-                            <i class="fa-solid fa-wind"></i>
-                            <span>Iniciar Respiración Guiada</span>
-                        </a>
-                        <a href="#chatbot" class="px-6 py-3.5 rounded-2xl bg-white text-sage-700 border border-sage-200 font-semibold text-sm hover:bg-sage-50 shadow-sm transition-all flex items-center gap-2">
-                            <i class="fa-solid fa-comments text-sage-500"></i>
-                            <span>Hablar con Consejero IA</span>
-                        </a>
+        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6">
+            Ruta Integral hacia tu <br class="hidden sm:inline">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-serene-300 via-teal-200 to-calm-400">Paz Interior y Nutrición Consciente</span>
+        </h1>
+
+        <p class="max-w-3xl mx-auto text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
+            Una plataforma interactiva e inteligente diseñada para cultivar la salud física y emocional.
+            Combina asistencia multimodal por IA, vídeos interactivos animados, sonidos ambientales y chequeos de estado de ánimo.
+        </p>
+
+        <!-- Slogan Four Pillars Cards Summary -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-5xl mx-auto text-left mb-10">
+            <div class="glass-card p-4 rounded-2xl border-l-4 border-teal-400">
+                <div class="text-teal-400 font-bold text-xs uppercase tracking-wider mb-1">Pilar 1</div>
+                <div class="font-display font-semibold text-sm text-slate-100">Detección temprana</div>
+                <p class="text-xs text-slate-400 mt-1">Identifica patrones de estrés y hambre emocional a tiempo.</p>
+            </div>
+            <div class="glass-card p-4 rounded-2xl border-l-4 border-serene-400">
+                <div class="text-serene-400 font-bold text-xs uppercase tracking-wider mb-1">Pilar 2</div>
+                <div class="font-display font-semibold text-sm text-slate-100">Autorregulación</div>
+                <p class="text-xs text-slate-400 mt-1">Técnicas de respiración e interacción sensorial en vivo.</p>
+            </div>
+            <div class="glass-card p-4 rounded-2xl border-l-4 border-calm-400">
+                <div class="text-calm-400 font-bold text-xs uppercase tracking-wider mb-1">Pilar 3</div>
+                <div class="font-display font-semibold text-sm text-slate-100">Autocuidado</div>
+                <p class="text-xs text-slate-400 mt-1">Nutrición balanceada con el constructor de platos mindful.</p>
+            </div>
+            <div class="glass-card p-4 rounded-2xl border-l-4 border-indigo-400">
+                <div class="text-indigo-400 font-bold text-xs uppercase tracking-wider mb-1">Pilar 4</div>
+                <div class="font-display font-semibold text-sm text-slate-100">Gestión de emociones</div>
+                <p class="text-xs text-slate-400 mt-1">Soporte empático 24/7 en texto, nota de voz y llamada.</p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="#ia-multimodal" class="px-6 py-3.5 rounded-xl bg-serene-500 hover:bg-serene-400 text-slate-950 font-bold text-base shadow-xl shadow-serene-500/20 transition flex items-center gap-2">
+                <i class="fa-solid fa-comments"></i> Iniciar Chat o Voz
+            </a>
+            <a href="#video-guias" class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-base border border-white/15 transition flex items-center gap-2">
+                <i class="fa-solid fa-circle-play text-calm-400"></i> Probar Videos Guiados
+            </a>
+        </div>
+    </section>
+
+    <!-- MODULE 1: IA MULTIMODAL (CHAT, GRABACIÓN DE VOZ Y LLAMADA EN VIVO) -->
+    <section id="ia-multimodal" class="py-12 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="text-center mb-8">
+            <span class="text-xs font-bold text-serene-400 uppercase tracking-widest">Asistencia Empática en Tiempo Real</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold mt-1">IA Multimodal: Serena</h2>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto mt-2">Elige cómo comunicarte: mediante texto guiado, grabación de voz hablada o una llamada telefónica simulada en directo.</p>
+        </div>
+
+        <div class="glass-panel rounded-3xl p-4 sm:p-6 shadow-2xl max-w-4xl mx-auto relative overflow-hidden">
+            <!-- Tabs for AI Mode -->
+            <div class="flex border-b border-white/10 mb-6 gap-2 sm:gap-4 overflow-x-auto pb-2">
+                <button id="tabChat" onclick="switchAIMode('chat')" class="flex-1 min-w-[120px] py-3 px-4 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 bg-serene-500/20 text-serene-300 border border-serene-500/40">
+                    <i class="fa-solid fa-message"></i> Chat Escrito
+                </button>
+                <button id="tabVoice" onclick="switchAIMode('voice')" class="flex-1 min-w-[120px] py-3 px-4 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 bg-white/5 text-slate-400 hover:text-white border border-transparent">
+                    <i class="fa-solid fa-microphone"></i> Nota de Voz
+                </button>
+                <button id="tabCall" onclick="openCallModal()" class="flex-1 min-w-[120px] py-3 px-4 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 bg-gradient-to-r from-calm-600/30 to-serene-600/30 text-calm-300 border border-calm-500/30 hover:border-calm-400">
+                    <i class="fa-solid fa-phone"></i> Llamada en Vivo
+                </button>
+            </div>
+
+            <!-- CHAT MODE CONTENT -->
+            <div id="aiChatContainer" class="block space-y-4">
+                <!-- Suggested Quick Prompts -->
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <span class="text-xs text-slate-400 py-1">Sugerencias rápidas:</span>
+                    <button onclick="setQuickPrompt('Siento ansiedad y me dan ganas de comer sin hambre real, ¿qué hago?')" class="text-xs px-3 py-1 rounded-full bg-white/5 hover:bg-serene-500/20 text-slate-300 hover:text-serene-300 border border-white/10 transition">
+                        🍎 Hambre Emocional vs Física
+                    </button>
+                    <button onclick="setQuickPrompt('Dame una técnica sencilla de 2 minutos para autorregular mi respiración.')" class="text-xs px-3 py-1 rounded-full bg-white/5 hover:bg-serene-500/20 text-slate-300 hover:text-serene-300 border border-white/10 transition">
+                        🧘 Técnica de Autorregulación
+                    </button>
+                    <button onclick="setQuickPrompt('¿Cómo puedo aplicar la detección temprana cuando comienzo a estresarme?')" class="text-xs px-3 py-1 rounded-full bg-white/5 hover:bg-serene-500/20 text-slate-300 hover:text-serene-300 border border-white/10 transition">
+                        ⚡ Detección Temprana del Estrés
+                    </button>
+                </div>
+
+                <!-- Chat Box Screen -->
+                <div id="chatHistory" class="h-80 overflow-y-auto space-y-3 p-4 rounded-2xl bg-slate-900/60 border border-white/5 text-sm">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-serene-500 flex items-center justify-center text-slate-950 font-bold shrink-0">
+                            <i class="fa-solid fa-leaf text-xs"></i>
+                        </div>
+                        <div class="bg-white/10 p-3.5 rounded-2xl rounded-tl-none max-w-[85%] text-slate-200">
+                            Hola, soy <strong>Serena</strong>. Estoy aquí para acompañarte en la <em>detección temprana, autorregulación, autocuidado y gestión de tus emociones</em>. ¿Cómo te sientes el día de hoy?
+                        </div>
                     </div>
                 </div>
 
-                <!-- CORE PILLARS BANNER -->
-                <div id="pilares" class="mt-16 pt-8">
-                    <div class="text-center mb-8">
-                        <h2 class="text-xs font-bold text-sage-600 uppercase tracking-widest">Nuestra Filosofía Integral</h2>
-                        <p class="font-display text-2xl sm:text-3xl font-bold text-sage-800 mt-1">
-                            Detección temprana, autorregulación, autocuidado y gestión de emociones.
-                        </p>
-                    </div>
+                <!-- Input area -->
+                <form onsubmit="handleChatSubmit(event)" class="flex gap-2">
+                    <input type="text" id="chatInput" placeholder="Escribe tu consulta sobre nutrición o estado emocional..." class="flex-1 px-4 py-3 rounded-xl bg-slate-900/80 border border-white/15 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-serene-400 text-sm">
+                    <button type="submit" class="px-5 py-3 rounded-xl bg-serene-500 hover:bg-serene-400 text-slate-950 font-bold transition flex items-center justify-center">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <!-- Pillar 1 -->
-                        <div class="bg-white/80 backdrop-blur p-6 rounded-3xl border border-sage-100 shadow-sm hover:shadow-md transition-all group">
-                            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-radar"></i>
-                            </div>
-                            <h3 class="font-display font-bold text-lg text-sage-800 mb-2">1. Detección Temprana</h3>
-                            <p class="text-xs sm:text-sm text-sage-600 leading-relaxed">
-                                Identifica a tiempo los síntomas de fatiga mental, ansiedad y señales de hambre emocional o desequilibrio físico.
-                            </p>
-                            <a href="#deteccion" class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 mt-4 hover:underline">
-                                Evaluarme ahora <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </a>
-                        </div>
+            <!-- VOICE RECORDING MODE CONTENT -->
+            <div id="aiVoiceContainer" class="hidden text-center py-6 space-y-6">
+                <p class="text-slate-300 text-sm max-w-md mx-auto">
+                    Presiona el micrófono para hablar con Serena. Tu voz se transcribirá, se enviará a la IA y la respuesta te será leída en voz alta.
+                </p>
 
-                        <!-- Pillar 2 -->
-                        <div class="bg-white/80 backdrop-blur p-6 rounded-3xl border border-sage-100 shadow-sm hover:shadow-md transition-all group">
-                            <div class="w-12 h-12 rounded-2xl bg-calm-100 text-calm-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-circle-nodes"></i>
-                            </div>
-                            <h3 class="font-display font-bold text-lg text-sage-800 mb-2">2. Autorregulación</h3>
-                            <p class="text-xs sm:text-sm text-sage-600 leading-relaxed">
-                                Restablece el equilibrio del sistema nervioso mediante ejercicios respiratorios adaptativos y pausas activas.
-                            </p>
-                            <a href="#autorregulacion" class="inline-flex items-center gap-1.5 text-xs font-semibold text-calm-600 mt-4 hover:underline">
-                                Practicar técnica <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </a>
-                        </div>
+                <div class="relative w-32 h-32 mx-auto flex items-center justify-center">
+                    <div id="recordingPing" class="absolute inset-0 rounded-full bg-rose-500/30 animate-ping hidden"></div>
+                    <button id="recordBtn" onclick="toggleVoiceRecording()" class="relative z-10 w-24 h-24 rounded-full bg-gradient-to-tr from-serene-500 to-calm-600 text-white text-3xl flex items-center justify-center shadow-xl shadow-serene-500/30 hover:scale-105 active:scale-95 transition">
+                        <i id="recordIcon" class="fa-solid fa-microphone"></i>
+                    </button>
+                </div>
 
-                        <!-- Pillar 3 -->
-                        <div class="bg-white/80 backdrop-blur p-6 rounded-3xl border border-sage-100 shadow-sm hover:shadow-md transition-all group">
-                            <div class="w-12 h-12 rounded-2xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-heart-pulse"></i>
-                            </div>
-                            <h3 class="font-display font-bold text-lg text-sage-800 mb-2">3. Autocuidado</h3>
-                            <p class="text-xs sm:text-sm text-sage-600 leading-relaxed">
-                                Integra hábitos sostenibles: descanso reparador, hidratación inteligente, movimiento suave y límites personales.
-                            </p>
-                            <a href="#autocuidado" class="inline-flex items-center gap-1.5 text-xs font-semibold text-sage-700 mt-4 hover:underline">
-                                Ver hábitos diarios <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </a>
-                        </div>
+                <div id="voiceStatus" class="text-xs font-semibold text-serene-400">Haz clic para comenzar a grabar</div>
 
-                        <!-- Pillar 4 -->
-                        <div class="bg-white/80 backdrop-blur p-6 rounded-3xl border border-sage-100 shadow-sm hover:shadow-md transition-all group">
-                            <div class="w-12 h-12 rounded-2xl bg-lavender-100 text-lavender-700 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-brain"></i>
-                            </div>
-                            <h3 class="font-display font-bold text-lg text-sage-800 mb-2">4. Gestión Emocional</h3>
-                            <p class="text-xs sm:text-sm text-sage-600 leading-relaxed">
-                                Comprende lo que tus emociones comunican, canalízalas sin juzgarlas y mantén un diálogo interno empático.
-                            </p>
-                            <a href="#emociones" class="inline-flex items-center gap-1.5 text-xs font-semibold text-lavender-700 mt-4 hover:underline">
-                                Registrar mi estado <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="bg-slate-900/60 rounded-2xl p-4 max-w-lg mx-auto border border-white/5 text-left text-xs space-y-2">
+                    <div class="text-slate-400 font-bold">Transcripción de voz:</div>
+                    <div id="voiceTranscript" class="text-slate-200 italic min-h-[30px]">"..."</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 1: DETECCIÓN TEMPRANA -->
-        <section id="deteccion" class="py-16 bg-white border-y border-sage-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
-                    <div>
-                        <span class="text-amber-700 font-bold text-xs uppercase tracking-wider">Pillar #1 • Prevención Consciente</span>
-                        <h2 class="font-display text-3xl sm:text-4xl font-bold text-sage-800 mt-1">Checklist de Detección Temprana</h2>
+    <!-- REALISTIC PHONE CALL SIMULATOR MODAL -->
+    <div id="callModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xl flex items-center justify-center p-4 hidden transition-opacity">
+        <div class="w-full max-w-sm glass-panel rounded-3xl p-6 text-center border border-white/20 shadow-2xl relative flex flex-col items-center min-h-[520px] justify-between">
+            
+            <!-- Top Call Header -->
+            <div class="w-full pt-2">
+                <span id="callStateLabel" class="inline-block px-3 py-1 rounded-full bg-serene-500/20 text-serene-300 text-xs font-semibold uppercase tracking-wider mb-2">
+                    Conectando llamada...
+                </span>
+                <h3 class="font-display text-2xl font-bold text-white">Serena IA</h3>
+                <p id="callTimer" class="text-xs text-slate-400 mt-1">00:00</p>
+            </div>
+
+            <!-- Avatar & Voice Wave Visualizer -->
+            <div class="my-6 relative flex flex-col items-center justify-center">
+                <div class="w-32 h-32 rounded-full bg-gradient-to-br from-serene-400 to-calm-600 p-1 shadow-2xl shadow-serene-500/40 relative">
+                    <div class="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-leaf text-5xl text-serene-400"></i>
                     </div>
-                    <p class="text-sage-600 text-sm max-w-md mt-2 md:mt-0">
-                        Marca los indicadores que has experimentado durante los últimos días para recibir una orientación inmediata de equilibrio.
-                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <!-- Interactive Assessment Form -->
-                    <div class="lg:col-span-7 bg-cream-50 p-6 sm:p-8 rounded-3xl border border-sage-200/70 shadow-sm">
-                        <h3 class="font-display font-bold text-lg text-sage-800 mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-clipboard-check text-amber-600"></i>
-                            <span>Evaluación de Señales de Alerta</span>
-                        </h3>
+                <!-- Animated Equalizer Bars -->
+                <div id="callEqualizer" class="flex items-center justify-center gap-1.5 h-10 mt-6 opacity-50">
+                    <div class="w-1.5 bg-serene-400 rounded-full equalizer-bar" style="animation-duration: 0.8s"></div>
+                    <div class="w-1.5 bg-teal-300 rounded-full equalizer-bar" style="animation-duration: 1.1s"></div>
+                    <div class="w-1.5 bg-calm-400 rounded-full equalizer-bar" style="animation-duration: 0.6s"></div>
+                    <div class="w-1.5 bg-indigo-300 rounded-full equalizer-bar" style="animation-duration: 1.3s"></div>
+                    <div class="w-1.5 bg-serene-300 rounded-full equalizer-bar" style="animation-duration: 0.9s"></div>
+                </div>
+            </div>
+
+            <!-- Dynamic Call Subtitles -->
+            <div class="w-full bg-slate-900/80 p-3 rounded-2xl border border-white/10 text-xs text-slate-300 min-h-[60px] max-h-[80px] overflow-y-auto mb-4 flex items-center justify-center italic text-center">
+                <span id="callSubtitleText">Habla libremente. Te escucho atentamente...</span>
+            </div>
+
+            <!-- Call Controls -->
+            <div class="w-full flex items-center justify-around pb-2">
+                <button id="callMuteBtn" onclick="toggleCallMute()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+                    <i id="callMuteIcon" class="fa-solid fa-microphone"></i>
+                </button>
+                
+                <button onclick="endCall()" class="w-16 h-16 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-2xl flex items-center justify-center shadow-lg shadow-rose-600/40 transition active:scale-95">
+                    <i class="fa-solid fa-phone-slash"></i>
+                </button>
+
+                <button id="callSpeakerBtn" onclick="toggleCallSpeaker()" class="w-12 h-12 rounded-full bg-serene-500/20 text-serene-300 flex items-center justify-center transition">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODULE 2: VIDEOS INTERACTIVOS CON ANIMACIONES -->
+    <section id="video-guias" class="py-12 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="text-center mb-8">
+            <span class="text-xs font-bold text-calm-400 uppercase tracking-widest">Experiencias Multimedia Interactivas</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold mt-1">Video-Guías Animadas e Interactivas</h2>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto mt-2">Aprende sobre nutrición consciente y autorregulación visual con simulaciones dinámicas en lienzo Canvas e interacciones en tiempo real.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Video Navigation Selection (Left Sidebar) -->
+            <div class="lg:col-span-4 space-y-4">
+                <button onclick="loadInteractiveVideo(1)" id="vidBtn1" class="w-full text-left p-4 rounded-2xl glass-card border-2 border-serene-500/80 bg-serene-500/10 transition flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-serene-500/20 text-serene-300 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-plate-wheat"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-serene-400 uppercase">Video Animado 1</span>
+                        <h4 class="font-display font-bold text-sm text-white">Mindful Eating & Plato Saludable</h4>
+                        <p class="text-xs text-slate-400 mt-1">Checkpoints interactivos sobre hambre física vs emocional.</p>
+                    </div>
+                </button>
+
+                <button onclick="loadInteractiveVideo(2)" id="vidBtn2" class="w-full text-left p-4 rounded-2xl glass-card border border-white/10 hover:border-calm-400/50 transition flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-calm-500/20 text-calm-300 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-spa"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-calm-400 uppercase">Video Animado 2</span>
+                        <h4 class="font-display font-bold text-sm text-white">Viaje de Autorregulación Visual</h4>
+                        <p class="text-xs text-slate-400 mt-1">Partículas en tiempo real con ritmos de respiración guiada.</p>
+                    </div>
+                </button>
+
+                <!-- Additional Relaxing Music Video Player Picker -->
+                <div class="glass-panel p-4 rounded-2xl border border-white/10 space-y-3">
+                    <h5 class="text-xs font-bold text-slate-300 uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-music text-teal-400"></i> Fondo Sonoro & Música de Meditación
+                    </h5>
+                    <select id="bgMusicSelect" onchange="changeBgMusicTrack()" class="w-full bg-slate-900 border border-white/10 text-xs text-slate-200 rounded-xl p-2.5 focus:outline-none">
+                        <option value="none">Sin música de fondo</option>
+                        <option value="meditation">Música Suave Meditativa (432Hz Synth)</option>
+                        <option value="nature">Fluido de Arroyo & Pájaros Sintéticos</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Video Player Canvas Container (Right Main Player) -->
+            <div class="lg:col-span-8">
+                <div class="glass-panel rounded-3xl overflow-hidden border border-white/15 shadow-2xl relative">
+                    
+                    <!-- Canvas Screen Video Player -->
+                    <div class="relative aspect-video bg-slate-950 flex items-center justify-center overflow-hidden">
+                        <canvas id="videoCanvas" class="w-full h-full cursor-pointer"></canvas>
                         
-                        <div class="space-y-3" id="checklistContainer">
-                            <label class="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-sage-100 hover:border-amber-200 cursor-pointer transition-all">
-                                <input type="checkbox" class="check-item rounded border-sage-300 text-sage-600 focus:ring-sage-500 mt-1 w-4 h-4">
-                                <div>
-                                    <span class="text-sm font-semibold text-sage-800 block">Tensión muscular en cuello o mandíbula</span>
-                                    <span class="text-xs text-sage-500">Rigidez al trabajar o al despertar por la mañana.</span>
+                        <!-- Interactive Checkpoint Overlay Popup -->
+                        <div id="videoOverlay" class="absolute inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-6 hidden z-20">
+                            <div class="bg-slate-900 border border-serene-500/40 p-6 rounded-2xl max-w-md text-center shadow-2xl space-y-4">
+                                <div class="w-12 h-12 rounded-full bg-serene-500/20 text-serene-300 flex items-center justify-center mx-auto text-xl">
+                                    <i class="fa-solid fa-circle-question"></i>
                                 </div>
-                            </label>
-
-                            <label class="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-sage-100 hover:border-amber-200 cursor-pointer transition-all">
-                                <input type="checkbox" class="check-item rounded border-sage-300 text-sage-600 focus:ring-sage-500 mt-1 w-4 h-4">
-                                <div>
-                                    <span class="text-sm font-semibold text-sage-800 block">Deseo repentino de comer por ansiedad o aburrimiento</span>
-                                    <span class="text-xs text-sage-500">Antojos intensos de ultraprocesados sin hambre física real.</span>
+                                <h4 id="overlayTitle" class="font-display font-bold text-lg text-white">Autochequeo Interactivo</h4>
+                                <p id="overlayText" class="text-xs text-slate-300">¿Estás experimentando hambre física (gradual, estómago) o hambre emocional (repentina, antojo específico)?</p>
+                                <div id="overlayButtons" class="flex flex-col gap-2">
+                                    <button onclick="resumeVideoWithChoice('fisica')" class="w-full py-2 px-4 rounded-xl bg-serene-500 hover:bg-serene-400 text-slate-950 font-bold text-xs">
+                                        Es Hambre Física (Necesito Nutrientes)
+                                    </button>
+                                    <button onclick="resumeVideoWithChoice('emocional')" class="w-full py-2 px-4 rounded-xl bg-calm-600 hover:bg-calm-500 text-white font-bold text-xs">
+                                        Es Hambre Emocional (Busco Autorregulación)
+                                    </button>
                                 </div>
-                            </label>
-
-                            <label class="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-sage-100 hover:border-amber-200 cursor-pointer transition-all">
-                                <input type="checkbox" class="check-item rounded border-sage-300 text-sage-600 focus:ring-sage-500 mt-1 w-4 h-4">
-                                <div>
-                                    <span class="text-sm font-semibold text-sage-800 block">Dificultad para mantener la concentración</span>
-                                    <span class="text-xs text-sage-500">Niebla mental, distracción constante o fatiga cognitiva.</span>
-                                </div>
-                            </label>
-
-                            <label class="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-sage-100 hover:border-amber-200 cursor-pointer transition-all">
-                                <input type="checkbox" class="check-item rounded border-sage-300 text-sage-600 focus:ring-sage-500 mt-1 w-4 h-4">
-                                <div>
-                                    <span class="text-sm font-semibold text-sage-800 block">Patrones de sueño alterados</span>
-                                    <span class="text-xs text-sage-500">Insomnio inicial, despertares nocturnos o cansancio persistente.</span>
-                                </div>
-                            </label>
-
-                            <label class="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-sage-100 hover:border-amber-200 cursor-pointer transition-all">
-                                <input type="checkbox" class="check-item rounded border-sage-300 text-sage-600 focus:ring-sage-500 mt-1 w-4 h-4">
-                                <div>
-                                    <span class="text-sm font-semibold text-sage-800 block">Irritabilidad o cambios bruscos de humor</span>
-                                    <span class="text-xs text-sage-500">Reactividad desmedida frente a situaciones cotidianas.</span>
-                                </div>
-                            </label>
-
-                            <label class="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-sage-100 hover:border-amber-200 cursor-pointer transition-all">
-                                <input type="checkbox" class="check-item rounded border-sage-300 text-sage-600 focus:ring-sage-500 mt-1 w-4 h-4">
-                                <div>
-                                    <span class="text-sm font-semibold text-sage-800 block">Sensación de ahogo o respiración superficial</span>
-                                    <span class="text-xs text-sage-500">Respirar solo con la parte alta del tórax de forma acelerada.</span>
-                                </div>
-                            </label>
-                        </div>
-
-                        <div class="mt-6 flex items-center justify-between pt-4 border-t border-sage-200/80">
-                            <span class="text-xs font-semibold text-sage-600" id="selectedCountText">0/6 señales seleccionadas</span>
-                            <button id="evaluateBtn" class="px-5 py-2.5 rounded-xl bg-amber-600 text-white font-medium text-xs sm:text-sm hover:bg-amber-700 transition-all shadow-sm">
-                                Generar Diagnóstico de Calma
-                            </button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Dynamic Results Panel -->
-                    <div class="lg:col-span-5 bg-gradient-to-br from-sage-800 to-sage-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between min-h-[420px]">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="text-xs uppercase tracking-widest text-sage-300 font-semibold">Estado Detectado</span>
-                                <span id="statusBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-sage-700 text-sage-100">Evaluación pendiente</span>
-                            </div>
-                            
-                            <h3 id="resultTitle" class="font-display text-2xl font-bold mb-3 text-cream-100">
-                                Realiza tu autoevaluación
-                            </h3>
-                            <p id="resultDesc" class="text-sm text-sage-200 leading-relaxed mb-6">
-                                Marca las casillas correspondientes a tu estado actual. Te mostraremos recomendaciones personalizadas para prevenir la sobrecarga emocional y física.
-                            </p>
-
-                            <div id="resultActionBox" class="p-4 rounded-2xl bg-white/10 backdrop-blur border border-white/10 space-y-2 hidden">
-                                <div class="font-semibold text-xs text-amber-300 uppercase tracking-wide">Acción Recomendada:</div>
-                                <p id="resultActionText" class="text-xs sm:text-sm text-sage-100 leading-snug"></p>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 pt-4 border-t border-sage-700/80 flex items-center gap-3">
-                            <i class="fa-solid fa-lightbulb text-amber-400 text-lg"></i>
-                            <span class="text-xs text-sage-300">
-                                La detección temprana evita que el estrés agudo se convierta en agotamiento crónico.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 2: AUTORREGULACIÓN Y RESPIRACIÓN GUIADA -->
-        <section id="autorregulacion" class="py-16 bg-cream-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <span class="text-calm-600 font-bold text-xs uppercase tracking-wider">Pillar #2 • Anclaje al Presente</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-sage-800 mt-1">Laboratorio de Autorregulación</h2>
-                    <p class="text-sage-600 text-sm mt-2">
-                        Utiliza técnicas de respiración validadas por la neurociencia para activar el sistema nervioso parasimpático y reducir los niveles de cortisol al instante.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <!-- Controls & Mode Selector -->
-                    <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl border border-sage-200/80 shadow-sm space-y-6">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-sage-600 mb-2">Selecciona la Técnica:</label>
-                            <div class="grid grid-cols-2 gap-3">
-                                <button id="btnTech478" class="tech-btn p-3 rounded-2xl border-2 border-calm-500 bg-calm-50 text-calm-800 text-left transition-all">
-                                    <div class="font-bold text-sm">Técnica 4-7-8</div>
-                                    <div class="text-[11px] text-sage-600 mt-1">Relajación profunda para ansiedad y sueño.</div>
-                                </button>
-                                <button id="btnTechBox" class="tech-btn p-3 rounded-2xl border-2 border-sage-200 bg-white text-sage-700 text-left hover:border-sage-300 transition-all">
-                                    <div class="font-bold text-sm">Cuadrada 4-4-4-4</div>
-                                    <div class="text-[11px] text-sage-600 mt-1">Claridad mental y enfoque inmediato.</div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Guide info -->
-                        <div class="p-4 rounded-2xl bg-cream-50 border border-sage-200 text-xs space-y-2 text-sage-700">
-                            <div class="font-bold text-sage-800 flex items-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-calm-600"></i>
-                                <span id="techInfoTitle">Pautas de la Técnica 4-7-8:</span>
-                            </div>
-                            <p id="techInfoDesc">
-                                Inhala suavemente por la nariz en 4s, mantén el aire en tus pulmones por 7s y exhala lentamente por la boca dejando ir toda la tensión en 8s.
-                            </p>
-                        </div>
-
-                        <!-- Play/Pause Controls -->
-                        <div class="flex items-center gap-4 pt-2">
-                            <button id="startBreathingBtn" class="flex-1 py-3.5 rounded-2xl bg-calm-600 hover:bg-calm-700 text-white font-semibold text-sm transition-all shadow-md shadow-calm-600/20 flex items-center justify-center gap-2">
+                    <!-- Custom Video Controls Bar -->
+                    <div class="p-4 bg-slate-900/90 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <button id="vidPlayBtn" onclick="toggleVideoPlay()" class="w-10 h-10 rounded-xl bg-serene-500 text-slate-950 font-bold flex items-center justify-center hover:bg-serene-400 transition">
                                 <i class="fa-solid fa-play"></i>
-                                <span id="startBreathingText">Iniciar Ejercicio</span>
                             </button>
-                            <button id="resetBreathingBtn" class="p-3.5 rounded-2xl bg-sage-100 hover:bg-sage-200 text-sage-700 transition-all">
-                                <i class="fa-solid fa-rotate-right"></i>
+                            <button onclick="restartVideo()" class="p-2 text-slate-400 hover:text-white transition" title="Reiniciar">
+                                <i class="fa-solid fa-rotate-left"></i>
                             </button>
+                            <span id="vidTitle" class="text-xs font-semibold text-slate-200">Video 1: Mindful Eating & Plato Saludable</span>
                         </div>
 
-                        <!-- Counters -->
-                        <div class="grid grid-cols-2 gap-4 text-center pt-2">
-                            <div class="p-3 rounded-2xl bg-sage-50 border border-sage-100">
-                                <div id="cycleCount" class="font-display font-bold text-xl text-sage-800">0</div>
-                                <div class="text-[11px] text-sage-500 uppercase font-semibold">Ciclos Completados</div>
+                        <!-- Progress Bar & Time -->
+                        <div class="flex-1 max-w-md mx-4 flex items-center gap-3">
+                            <span id="vidCurrentTime" class="text-[11px] font-mono text-slate-400">00:00</span>
+                            <div class="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden relative cursor-pointer" onclick="seekVideo(event)">
+                                <div id="vidProgressBar" class="h-full bg-gradient-to-r from-serene-400 to-calm-400 w-0"></div>
                             </div>
-                            <div class="p-3 rounded-2xl bg-sage-50 border border-sage-100">
-                                <div id="timerDisplay" class="font-display font-bold text-xl text-sage-800">00:00</div>
-                                <div class="text-[11px] text-sage-500 uppercase font-semibold">Tiempo Transcurrido</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Visual Breathing Orb Interactive -->
-                    <div class="lg:col-span-7 flex flex-col items-center justify-center p-8 bg-white/60 backdrop-blur rounded-3xl border border-sage-200/60 min-h-[420px] relative overflow-hidden">
-                        <div class="text-center z-10 mb-8">
-                            <div id="breathStateText" class="font-display font-extrabold text-3xl text-sage-800 tracking-tight">Listo para comenzar</div>
-                            <div id="breathSubText" class="text-sm font-medium text-sage-600 mt-1">Presiona "Iniciar Ejercicio" y busca una postura cómoda.</div>
-                        </div>
-
-                        <!-- Breathing Animated Circle -->
-                        <div class="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center my-4">
-                            <div id="breathOrbOuter" class="absolute inset-0 rounded-full bg-gradient-to-br from-calm-200/50 to-sage-200/50 border-2 border-calm-300 transition-all duration-1000 scale-100"></div>
-                            <div id="breathOrbInner" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-tr from-sage-500 to-calm-500 text-white flex flex-col items-center justify-center shadow-xl transition-all duration-1000 z-10">
-                                <span id="breathCountdown" class="font-display font-bold text-4xl">4</span>
-                                <span class="text-[10px] uppercase font-semibold tracking-widest text-cream-200 mt-1">Segundos</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 text-xs text-sage-500 text-center max-w-sm">
-                            <i class="fa-solid fa-volume-high text-sage-400 mr-1"></i> Sonido suave habilitado para guiar tus cambios de fase.
+                            <span id="vidDuration" class="text-[11px] font-mono text-slate-400">01:00</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 3: AUTOCUIDADO - RUTINAS DIARIAS E HIDRATACIÓN -->
-        <section id="autocuidado" class="py-16 bg-white border-b border-sage-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
-                    <div>
-                        <span class="text-sage-600 font-bold text-xs uppercase tracking-wider">Pillar #3 • Hábitos Conscientes</span>
-                        <h2 class="font-display text-3xl sm:text-4xl font-bold text-sage-800 mt-1">Módulo de Autocuidado Diario</h2>
-                    </div>
-                    <p class="text-sage-600 text-sm max-w-md mt-2 md:mt-0">
-                        Pqueñas acciones acumulativas transforman tu energía y protegen tu bienestar mental.
-                    </p>
-                </div>
+    <!-- MODULE 3: EJERCICIOS DE RELAJACIÓN Y SONIDOS AMBIENTALES -->
+    <section id="ejercicios" class="py-12 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="text-center mb-8">
+            <span class="text-xs font-bold text-teal-400 uppercase tracking-widest">Técnicas Activas de Autorregulación</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold mt-1">Guía Visual de Respiración & Sonidos Ambientales</h2>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto mt-2">Sincroniza tu respiración con patrones probados y crea tu propia atmósfera sonora relajante generada dinámicamente.</p>
+        </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <!-- Hydration Interactive Tracker -->
-                    <div class="lg:col-span-5 bg-gradient-to-br from-calm-50 to-sage-50 p-6 sm:p-8 rounded-3xl border border-calm-200/60 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center gap-2 text-calm-700 font-bold text-sm">
-                                    <i class="fa-solid fa-glass-water text-lg"></i>
-                                    <span>Rastreador de Hidratación</span>
-                                </div>
-                                <span id="waterGoalText" class="text-xs font-bold text-calm-800 bg-calm-200/80 px-2.5 py-1 rounded-full">0 / 8 Vasos (0 L)</span>
-                            </div>
-                            <p class="text-xs text-sage-600 mb-6">
-                                La deshidratación leve aumenta la sensación de fatiga y la irritabilidad. Mantén tus células nutridas.
-                            </p>
-
-                            <!-- Water Glasses Grid -->
-                            <div id="waterGrid" class="grid grid-cols-4 gap-3 mb-6">
-                                <!-- 8 Interactive Glasses rendered via JS -->
-                            </div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <button id="addWaterBtn" class="w-full py-3 rounded-2xl bg-calm-600 hover:bg-calm-700 text-white font-semibold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-plus"></i>
-                                <span>Registrar Vaso de Agua (250 ml)</span>
-                            </button>
-                            <button id="resetWaterBtn" class="w-full py-2 rounded-xl text-sage-500 hover:text-sage-700 text-xs font-medium text-center">
-                                Reiniciar contador de hoy
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Daily Care Checklist Cards -->
-                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-cream-50 p-5 rounded-3xl border border-sage-200/70">
-                            <div class="w-10 h-10 rounded-xl bg-sage-200 text-sage-800 flex items-center justify-center mb-3">
-                                <i class="fa-solid fa-moon"></i>
-                            </div>
-                            <h4 class="font-bold text-sage-800 text-base mb-1">Higiene del Sueño</h4>
-                            <p class="text-xs text-sage-600 mb-3">Apaga pantallas 45 min antes de dormir. Utiliza luces cálidas e infusiones relajantes.</p>
-                            <span class="text-[11px] font-semibold text-sage-700 bg-white px-2.5 py-1 rounded-lg border border-sage-200">
-                                Meta: 7-8 hrs continuas
-                            </span>
-                        </div>
-
-                        <div class="bg-cream-50 p-5 rounded-3xl border border-sage-200/70">
-                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center mb-3">
-                                <i class="fa-solid fa-person-walking"></i>
-                            </div>
-                            <h4 class="font-bold text-sage-800 text-base mb-1">Pausas Activas</h4>
-                            <p class="text-xs text-sage-600 mb-3">Realiza estiramientos suaves cada 60 minutos para liberar la tensión acumulada en espalda y cuello.</p>
-                            <span class="text-[11px] font-semibold text-sage-700 bg-white px-2.5 py-1 rounded-lg border border-sage-200">
-                                Meta: 3 micro-pausas al día
-                            </span>
-                        </div>
-
-                        <div class="bg-cream-50 p-5 rounded-3xl border border-sage-200/70">
-                            <div class="w-10 h-10 rounded-xl bg-lavender-100 text-lavender-800 flex items-center justify-center mb-3">
-                                <i class="fa-solid fa-shield-halved"></i>
-                            </div>
-                            <h4 class="font-bold text-sage-800 text-base mb-1">Límites Saludables</h4>
-                            <p class="text-xs text-sage-600 mb-3">Aprende a decir "no" sin culpa para resguardar tu energía mental y tus momentos de descanso.</p>
-                            <span class="text-[11px] font-semibold text-sage-700 bg-white px-2.5 py-1 rounded-lg border border-sage-200">
-                                Espacio personal protegido
-                            </span>
-                        </div>
-
-                        <div class="bg-cream-50 p-5 rounded-3xl border border-sage-200/70">
-                            <div class="w-10 h-10 rounded-xl bg-calm-100 text-calm-800 flex items-center justify-center mb-3">
-                                <i class="fa-solid fa-sun"></i>
-                            </div>
-                            <h4 class="font-bold text-sage-800 text-base mb-1">Contacto con la Naturaleza</h4>
-                            <p class="text-xs text-sage-600 mb-3">Toma 10 minutos de luz solar matutina para regular tu ritmo circadiano y sintesis de vitamina D.</p>
-                            <span class="text-[11px] font-semibold text-sage-700 bg-white px-2.5 py-1 rounded-lg border border-sage-200">
-                                Recarga de vitalidad
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: GESTIÓN DE EMOCIONES (MOOD TRACKER) -->
-        <section id="emociones" class="py-16 bg-cream-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <span class="text-lavender-700 font-bold text-xs uppercase tracking-wider">Pillar #4 • Inteligencia Emocional</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-sage-800 mt-1">Registro de Estado de Ánimo</h2>
-                    <p class="text-sage-600 text-sm mt-2">
-                        Las emociones son información, no etiquetas definitivas. Registra cómo te sientes hoy para obtener recomendaciones de autorregulación.
-                    </p>
-                </div>
-
-                <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-3xl border border-sage-200/80 shadow-sm">
-                    <h3 class="text-center font-bold text-sage-800 text-lg mb-6">¿Cómo te sientes en este momento?</h3>
-                    
-                    <!-- Mood Buttons -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mb-8" id="moodSelector">
-                        <button data-mood="calmo" class="mood-btn p-4 rounded-2xl border-2 border-sage-100 bg-cream-50 hover:border-sage-300 text-center transition-all">
-                            <span class="text-3xl block mb-1">🌿</span>
-                            <span class="text-xs font-bold text-sage-800 block">Tranquilo</span>
-                        </button>
-                        <button data-mood="ansioso" class="mood-btn p-4 rounded-2xl border-2 border-sage-100 bg-cream-50 hover:border-sage-300 text-center transition-all">
-                            <span class="text-3xl block mb-1">🌊</span>
-                            <span class="text-xs font-bold text-sage-800 block">Ansioso</span>
-                        </button>
-                        <button data-mood="estresado" class="mood-btn p-4 rounded-2xl border-2 border-sage-100 bg-cream-50 hover:border-sage-300 text-center transition-all">
-                            <span class="text-3xl block mb-1">⚡</span>
-                            <span class="text-xs font-bold text-sage-800 block">Estresado</span>
-                        </button>
-                        <button data-mood="cansado" class="mood-btn p-4 rounded-2xl border-2 border-sage-100 bg-cream-50 hover:border-sage-300 text-center transition-all">
-                            <span class="text-3xl block mb-1">🌙</span>
-                            <span class="text-xs font-bold text-sage-800 block">Agotado</span>
-                        </button>
-                        <button data-mood="triste" class="mood-btn p-4 rounded-2xl border-2 border-sage-100 bg-cream-50 hover:border-sage-300 text-center transition-all">
-                            <span class="text-3xl block mb-1">🌧️</span>
-                            <span class="text-xs font-bold text-sage-800 block">Triste</span>
-                        </button>
-                        <button data-mood="entusiasmado" class="mood-btn p-4 rounded-2xl border-2 border-sage-100 bg-cream-50 hover:border-sage-300 text-center transition-all">
-                            <span class="text-3xl block mood-icon mb-1">✨</span>
-                            <span class="text-xs font-bold text-sage-800 block">Energizado</span>
-                        </button>
-                    </div>
-
-                    <!-- Mood Advice Box (Hidden until selected) -->
-                    <div id="moodAdviceCard" class="hidden p-6 rounded-2xl bg-lavender-50 border border-lavender-200 text-sage-800 space-y-3 mb-6 transition-all">
-                        <div class="flex items-center gap-2 text-lavender-700 font-bold text-base">
-                            <i class="fa-solid fa-heart text-lg"></i>
-                            <span id="moodAdviceTitle">Consejo de Autocuidado:</span>
-                        </div>
-                        <p id="moodAdviceText" class="text-xs sm:text-sm text-sage-700 leading-relaxed"></p>
-                    </div>
-
-                    <!-- Short Journal Note -->
-                    <div class="space-y-3">
-                        <label class="block text-xs font-bold text-sage-700 uppercase tracking-wider">Reflexión corta o notas del día (Opcional):</label>
-                        <textarea id="moodNoteInput" rows="2" placeholder="Escribe brevemente qué desencadenó esta sensación o qué necesitas ahora..." class="w-full p-3.5 text-xs sm:text-sm rounded-2xl border border-sage-200 focus:outline-none focus:ring-2 focus:ring-sage-500 bg-cream-50/50"></textarea>
-                    </div>
-
-                    <div class="mt-4 flex justify-end">
-                        <button id="saveMoodBtn" class="px-6 py-2.5 rounded-xl bg-lavender-700 hover:bg-lavender-800 text-white font-medium text-xs sm:text-sm transition-all shadow-sm">
-                            Guardar en Historial
-                        </button>
-                    </div>
-
-                    <!-- Saved Mood History -->
-                    <div class="mt-8 pt-6 border-t border-sage-200/80">
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-sage-600 mb-3">Historial Reciente de Registro:</h4>
-                        <div id="moodHistoryList" class="space-y-2">
-                            <!-- Populated dynamically -->
-                            <p class="text-xs text-sage-500 italic">No hay registros aún hoy.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 5: ALIMENTACIÓN SALUDABLE Y CREADOR DE PLATO -->
-        <section id="nutricion" class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <span class="text-sage-600 font-bold text-xs uppercase tracking-wider">Alimentación Consciente & Eje Intestino-Cerebro</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-sage-800 mt-1">Plato Saludable & Nutrición Serena</h2>
-                    <p class="text-sage-600 text-sm mt-2">
-                        El 90% de la serotonina (la hormona del bienestar) se produce en el intestino. Diseña tus comidas respetando las proporciones ideales.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <!-- Interactive Plate Builder -->
-                    <div class="lg:col-span-7 bg-cream-50 p-6 sm:p-8 rounded-3xl border border-sage-200/80 shadow-sm space-y-6">
-                        <h3 class="font-display font-bold text-xl text-sage-800 flex items-center gap-2">
-                            <i class="fa-solid fa-utensils text-sage-600"></i>
-                            <span>Arma tu Comida Equilibrada</span>
-                        </h3>
-                        <p class="text-xs text-sage-600">Selecciona los componentes para estructurar tu plato según el método de Harvard para el plato saludable:</p>
-
-                        <!-- Component Selector Category Accordions -->
-                        <div class="space-y-4">
-                            <!-- Veggies (50%) -->
-                            <div class="p-4 bg-white rounded-2xl border border-sage-200">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-carrot"></i> Vegetales & Hortalizas (50% del plato)
-                                    </span>
-                                    <span class="text-[11px] font-semibold text-sage-500" id="selectedVeggieText">Ninguno</span>
-                                </div>
-                                <div class="flex flex-wrap gap-2" id="veggieOptions">
-                                    <button data-type="veggie" data-val="Espinaca & Acelga" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-emerald-500 transition-all">🥬 Espinaca & Acelga</button>
-                                    <button data-type="veggie" data-val="Brócoli al Vapor" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-emerald-500 transition-all">🥦 Brócoli</button>
-                                    <button data-type="veggie" data-val="Ensalada Mixta" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-emerald-500 transition-all">🥗 Ensalada Fresca</button>
-                                    <button data-type="veggie" data-val="Zanahoria & Calabaza" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-emerald-500 transition-all">🥕 Zanahoria & Calabaza</button>
-                                </div>
-                            </div>
-
-                            <!-- Protein (25%) -->
-                            <div class="p-4 bg-white rounded-2xl border border-sage-200">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-xs font-bold uppercase tracking-wider text-amber-700 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-egg"></i> Proteína Magra (25% del plato)
-                                    </span>
-                                    <span class="text-[11px] font-semibold text-sage-500" id="selectedProteinText">Ninguna</span>
-                                </div>
-                                <div class="flex flex-wrap gap-2" id="proteinOptions">
-                                    <button data-type="protein" data-val="Pechuga a la Plancha" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-amber-500 transition-all">🍗 Pechuga de Pollo</button>
-                                    <button data-type="protein" data-val="Salmón u Pescado" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-amber-500 transition-all">🐟 Pescado de Mar</button>
-                                    <button data-type="protein" data-val="Tofu / Lentejas" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-amber-500 transition-all">🧆 Tofu / Lentejas</button>
-                                    <button data-type="protein" data-val="Huevos Revueltos" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-amber-500 transition-all">🥚 Huevos</button>
-                                </div>
-                            </div>
-
-                            <!-- Carbs (25%) -->
-                            <div class="p-4 bg-white rounded-2xl border border-sage-200">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-xs font-bold uppercase tracking-wider text-calm-700 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-wheat-awn"></i> Carbohidratos Complejos (25% del plato)
-                                    </span>
-                                    <span class="text-[11px] font-semibold text-sage-500" id="selectedCarbText">Ninguno</span>
-                                </div>
-                                <div class="flex flex-wrap gap-2" id="carbOptions">
-                                    <button data-type="carb" data-val="Quinoa al Vapor" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-calm-500 transition-all">🍚 Quinoa</button>
-                                    <button data-type="carb" data-val="Camote Asado" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-calm-500 transition-all">🍠 Camote / Batata</button>
-                                    <button data-type="carb" data-val="Arroz Integral" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-calm-500 transition-all">🌾 Arroz Integral</button>
-                                    <button data-type="carb" data-val="Avena en Hojuelas" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-calm-500 transition-all">🥣 Avena Integral</button>
-                                </div>
-                            </div>
-
-                            <!-- Healthy Fats -->
-                            <div class="p-4 bg-white rounded-2xl border border-sage-200">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-xs font-bold uppercase tracking-wider text-lavender-700 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-seedling"></i> Grasa Saludable (Acompañamiento)
-                                    </span>
-                                    <span class="text-[11px] font-semibold text-sage-500" id="selectedFatText">Ninguna</span>
-                                </div>
-                                <div class="flex flex-wrap gap-2" id="fatOptions">
-                                    <button data-type="fat" data-val="Aguacate / Palta" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-lavender-500 transition-all">🥑 Aguacate</button>
-                                    <button data-type="fat" data-val="Aceite de Oliva Extra Virgen" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-lavender-500 transition-all">🫒 Aceite de Oliva</button>
-                                    <button data-type="fat" data-val="Semillas de Chía / Lino" class="plate-opt text-xs px-3 py-1.5 rounded-xl border border-sage-200 hover:border-lavender-500 transition-all">🌻 Semillas Mixtas</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Visual Plate Diagram & Feedback -->
-                    <div class="lg:col-span-5 space-y-6">
-                        <div class="bg-gradient-to-b from-cream-100 to-cream-200/60 p-6 rounded-3xl border border-sage-200/80 text-center shadow-sm">
-                            <h4 class="font-bold text-sage-800 text-sm uppercase tracking-wider mb-4">Vista Gráfica de tu Plato</h4>
-                            
-                            <!-- Circular Graphic Plate -->
-                            <div class="w-64 h-64 mx-auto rounded-full bg-white border-8 border-sage-200 relative overflow-hidden shadow-inner flex flex-col my-2">
-                                <div class="h-1/2 bg-emerald-100/80 border-b-2 border-sage-300 flex items-center justify-center p-2 text-center">
-                                    <span id="plateVeggieLabel" class="text-xs font-bold text-emerald-800">50% Vegetales</span>
-                                </div>
-                                <div class="h-1/2 flex">
-                                    <div class="w-1/2 bg-amber-100/80 border-r-2 border-sage-300 flex items-center justify-center p-2 text-center">
-                                        <span id="plateProteinLabel" class="text-[11px] font-bold text-amber-800">25% Proteína</span>
-                                    </div>
-                                    <div class="w-1/2 bg-calm-100/80 flex items-center justify-center p-2 text-center">
-                                        <span id="plateCarbLabel" class="text-[11px] font-bold text-calm-800">25% Carbohidratos</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="plateFatBadge" class="inline-block mt-3 px-3 py-1 rounded-full bg-lavender-100 text-lavender-800 text-xs font-semibold">
-                                Fat: Sin seleccionar
-                            </div>
-                        </div>
-
-                        <!-- Infusion & Calming Recipe Recommendation Card -->
-                        <div class="bg-sage-800 text-white p-6 rounded-3xl shadow-md space-y-3">
-                            <div class="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                                <i class="fa-solid fa-mug-hot"></i> Infusión Relajante Sugerida
-                            </div>
-                            <h4 class="font-display font-bold text-lg">Té de Manzanilla, Toronjil & Lavanda</h4>
-                            <p class="text-xs text-sage-200 leading-relaxed">
-                                Bebida ideal para después de la cena. Ayuda a relajar el tracto gastrointestinal y reduce los espasmos provocados por el estrés del día.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 6: RELAJACIÓN (MÚSICA WEB AUDIO & GALERÍA DE VIDEOS) -->
-        <section id="relajacion" class="py-16 bg-cream-100 border-t border-sage-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <span class="text-calm-600 font-bold text-xs uppercase tracking-wider">Espacio de Paz & Enfoque</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-sage-800 mt-1">Sinfonía Ambiental & Meditaciones</h2>
-                    <p class="text-sage-600 text-sm mt-2">
-                        Genera paisajes sonoros relajantes en tiempo real con Web Audio API o realiza una pausa guiada con nuestra galería de videos seleccionados.
-                    </p>
-                </div>
-
-                <!-- Web Audio Sound Generators Panel -->
-                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-sage-200 shadow-sm mb-12">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4 border-b border-sage-100 pb-4">
-                        <div>
-                            <h3 class="font-display font-bold text-xl text-sage-800 flex items-center gap-2">
-                                <i class="fa-solid fa-sliders text-calm-600"></i>
-                                <span>Generador de Paisajes Sonoros Naturaleza</span>
-                            </h3>
-                            <p class="text-xs text-sage-500">Haz clic para encender o combinar diferentes atmósferas sin consumir datos adicionales.</p>
-                        </div>
-                        <button id="stopAllAudioBtn" class="px-4 py-2 rounded-xl bg-sage-100 text-sage-700 hover:bg-sage-200 text-xs font-semibold flex items-center gap-2 self-start sm:self-auto">
-                            <i class="fa-solid fa-volume-xmark"></i> Silenciar Todo
-                        </button>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <!-- Sound Card 1: Lluvia -->
-                        <div class="p-5 rounded-2xl bg-cream-50 border border-sage-200 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="font-bold text-sm text-sage-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-cloud-rain text-calm-600"></i> Lluvia Suave
-                                </span>
-                                <button data-sound="rain" class="sound-toggle-btn w-9 h-9 rounded-full bg-sage-200 text-sage-700 flex items-center justify-center hover:bg-calm-500 hover:text-white transition-all">
-                                    <i class="fa-solid fa-play text-xs"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-semibold text-sage-500 uppercase">Volumen</label>
-                                <input type="range" id="volRain" min="0" max="1" step="0.05" value="0.5" class="w-full accent-calm-600 h-1.5 bg-sage-200 rounded-lg">
-                            </div>
-                        </div>
-
-                        <!-- Sound Card 2: Olas del Mar -->
-                        <div class="p-5 rounded-2xl bg-cream-50 border border-sage-200 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="font-bold text-sm text-sage-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-water text-calm-600"></i> Olas Serenas
-                                </span>
-                                <button data-sound="ocean" class="sound-toggle-btn w-9 h-9 rounded-full bg-sage-200 text-sage-700 flex items-center justify-center hover:bg-calm-500 hover:text-white transition-all">
-                                    <i class="fa-solid fa-play text-xs"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-semibold text-sage-500 uppercase">Volumen</label>
-                                <input type="range" id="volOcean" min="0" max="1" step="0.05" value="0.5" class="w-full accent-calm-600 h-1.5 bg-sage-200 rounded-lg">
-                            </div>
-                        </div>
-
-                        <!-- Sound Card 3: Acordes Zen -->
-                        <div class="p-5 rounded-2xl bg-cream-50 border border-sage-200 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="font-bold text-sm text-sage-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-music text-lavender-600"></i> Melodía Zen
-                                </span>
-                                <button data-sound="zen" class="sound-toggle-btn w-9 h-9 rounded-full bg-sage-200 text-sage-700 flex items-center justify-center hover:bg-lavender-500 hover:text-white transition-all">
-                                    <i class="fa-solid fa-play text-xs"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-semibold text-sage-500 uppercase">Volumen</label>
-                                <input type="range" id="volZen" min="0" max="1" step="0.05" value="0.4" class="w-full accent-lavender-600 h-1.5 bg-sage-200 rounded-lg">
-                            </div>
-                        </div>
-
-                        <!-- Sound Card 4: Ruido Blanco / Rosa -->
-                        <div class="p-5 rounded-2xl bg-cream-50 border border-sage-200 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="font-bold text-sm text-sage-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-wind text-sage-600"></i> Calma Blanca
-                                </span>
-                                <button data-sound="white" class="sound-toggle-btn w-9 h-9 rounded-full bg-sage-200 text-sage-700 flex items-center justify-center hover:bg-sage-600 hover:text-white transition-all">
-                                    <i class="fa-solid fa-play text-xs"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-semibold text-sage-500 uppercase">Volumen</label>
-                                <input type="range" id="volWhite" min="0" max="1" step="0.05" value="0.3" class="w-full accent-sage-600 h-1.5 bg-sage-200 rounded-lg">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Video Gallery Grid -->
-                <div>
-                    <h3 class="font-display font-bold text-xl text-sage-800 mb-6 flex items-center gap-2">
-                        <i class="fa-solid fa-video text-amber-600"></i>
-                        <span>Galería de Guias Integrales en Video</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- BREATHING GUIDED SPHERE -->
+            <div class="glass-panel rounded-3xl p-6 border border-white/10 flex flex-col items-center justify-between min-h-[420px]">
+                <div class="w-full flex justify-between items-center mb-4">
+                    <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                        <i class="fa-solid fa-wind text-serene-400"></i> Respiración Guiada
                     </h3>
+                    <select id="breathTechnique" onchange="changeBreathingTechnique()" class="bg-slate-900 border border-white/10 text-xs text-serene-300 rounded-xl px-3 py-1.5 focus:outline-none">
+                        <option value="478">Técnica 4-7-8 (Calmante)</option>
+                        <option value="box">Respiración en Caja (Box 4-4-4-4)</option>
+                    </select>
+                </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Video Card 1 -->
-                        <div class="bg-white rounded-3xl overflow-hidden border border-sage-200 shadow-sm hover:shadow-md transition-all flex flex-col">
-                            <div class="relative pt-[56.25%] bg-sage-900">
-                                <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/inpok4MKVLM" title="Meditacion Guiada 10 min" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="p-5 flex-grow flex flex-col justify-between space-y-2">
-                                <div>
-                                    <span class="text-[10px] font-bold text-calm-700 uppercase bg-calm-50 px-2 py-0.5 rounded-md">Meditación</span>
-                                    <h4 class="font-bold text-sage-800 text-sm mt-1">Meditación Guiada 10 Minutos para Liberar Ansiedad</h4>
-                                </div>
-                                <p class="text-xs text-sage-500">Ideal para comenzar tu mañana o descompresionar al finalizar la jornada laboral.</p>
-                            </div>
+                <!-- Expanding Glowing Sphere Canvas -->
+                <div class="relative w-64 h-64 flex items-center justify-center my-4">
+                    <canvas id="breathCanvas" width="250" height="250" class="rounded-full"></canvas>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+                        <span id="breathPhase" class="text-sm font-bold text-serene-300 uppercase tracking-widest">Listo</span>
+                        <span id="breathTimer" class="text-4xl font-extrabold font-display text-white mt-1">0</span>
+                    </div>
+                </div>
+
+                <div class="w-full flex items-center justify-center gap-4 mt-2">
+                    <button id="breathStartBtn" onclick="toggleBreathing()" class="px-6 py-2.5 rounded-xl bg-serene-500 hover:bg-serene-400 text-slate-950 font-bold text-sm shadow-lg shadow-serene-500/20 transition">
+                        Comenzar Ejercicio
+                    </button>
+                </div>
+            </div>
+
+            <!-- WEB AUDIO SOUNDSCAPE GENERATOR -->
+            <div class="glass-panel rounded-3xl p-6 border border-white/10 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-calm-400"></i> Generador de Atmósfera Relajante
+                        </h3>
+                        <span class="text-[10px] uppercase font-semibold px-2 py-1 bg-white/5 rounded text-slate-400">Web Audio API</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-6">Mezcla elementos de la naturaleza sintetizados en tiempo real para apoyar tu concentración o descanso.</p>
+
+                    <div class="space-y-4">
+                        <!-- Sound 1: Lluvia -->
+                        <div class="flex items-center gap-4">
+                            <div class="w-8 text-slate-300 text-sm"><i class="fa-solid fa-cloud-rain text-blue-400"></i></div>
+                            <span class="text-xs font-semibold text-slate-200 w-24">Lluvia Suave</span>
+                            <input type="range" id="volRain" min="0" max="100" value="0" oninput="updateSoundVolume('rain', this.value)" class="flex-1 accent-serene-400 h-1.5 bg-slate-800 rounded-lg cursor-pointer">
                         </div>
 
-                        <!-- Video Card 2 -->
-                        <div class="bg-white rounded-3xl overflow-hidden border border-sage-200 shadow-sm hover:shadow-md transition-all flex flex-col">
-                            <div class="relative pt-[56.25%] bg-sage-900">
-                                <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/sTANio_2E0Q" title="Yoga Suave y Estiramientos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="p-5 flex-grow flex flex-col justify-between space-y-2">
-                                <div>
-                                    <span class="text-[10px] font-bold text-sage-700 uppercase bg-sage-50 px-2 py-0.5 rounded-md">Movimiento Suave</span>
-                                    <h4 class="font-bold text-sage-800 text-sm mt-1">Yoga y Estiramientos para Eliminar Tensión Muscular</h4>
-                                </div>
-                                <p class="text-xs text-sage-500">Secuencia suave enfocada en espalda, cuello y flexibilidad corporal.</p>
-                            </div>
+                        <!-- Sound 2: Océano -->
+                        <div class="flex items-center gap-4">
+                            <div class="w-8 text-slate-300 text-sm"><i class="fa-solid fa-water text-cyan-400"></i></div>
+                            <span class="text-xs font-semibold text-slate-200 w-24">Olas del Mar</span>
+                            <input type="range" id="volOcean" min="0" max="100" value="0" oninput="updateSoundVolume('ocean', this.value)" class="flex-1 accent-serene-400 h-1.5 bg-slate-800 rounded-lg cursor-pointer">
                         </div>
 
-                        <!-- Video Card 3 -->
-                        <div class="bg-white rounded-3xl overflow-hidden border border-sage-200 shadow-sm hover:shadow-md transition-all flex flex-col">
-                            <div class="relative pt-[56.25%] bg-sage-900">
-                                <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/1ZYbU87XA28" title="Mindful Eating" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="p-5 flex-grow flex flex-col justify-between space-y-2">
-                                <div>
-                                    <span class="text-[10px] font-bold text-amber-700 uppercase bg-amber-50 px-2 py-0.5 rounded-md">Alimentación</span>
+                        <!-- Sound 3: Cuenco Tibetano / Binaural -->
+                        <div class="flex items-center gap-4">
+                            <div class="w-8 text-slate-300 text-sm"><i class="fa-solid fa-bell text-amber-400"></i></div>
+                            <span class="text-xs font-semibold text-slate-200 w-24">Cuenco Místico</span>
+                            <input type="range" id="volBowl" min="0" max="100" value="0" oninput="updateSoundVolume('bowl', this.value)" class="flex-1 accent-serene-400 h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Sound 4: Fuego -->
+                        <div class="flex items-center gap-4">
+                            <div class="w-8 text-slate-300 text-sm"><i class="fa-solid fa-fire text-rose-400"></i></div>
+                            <span class="text-xs font-semibold text-slate-200 w-24">Fogata</span>
+                            <input type="range" id="volFire" min="0" max="100" value="0" oninput="updateSoundVolume('fire', this.value)" class="flex-1 accent-serene-400 h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/10 flex items-center justify-between mt-4">
+                    <span class="text-xs text-slate-400">Control maestro de sonido</span>
+                    <button onclick="stopAllSounds()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-slate-200 transition">
+                        Mute General
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 4: NUTRICIÓN SALUDABLE Y AUTOCUIDADO (CONSTRUCTOR DE PLATO) -->
+    <section id="plato-mindful" class="py-12 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="text-center mb-8">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Pilar de Autocuidado Físico</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold mt-1">Constructor de "Plato Saludable Mindful"</h2>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto mt-2">Diseña la proporción ideal para tu plato consciente. Equilibra vegetales, proteínas limpias, carbohidratos complejos y grasas saludables.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Food Item Selectors (Left) -->
+            <div class="lg:col-span-5 space-y-4">
+                <div class="glass-panel p-5 rounded-3xl border border-white/10 space-y-4">
+                    <h4 class="font-display font-bold text-sm text-white border-b border-white/10 pb-2 flex items-center justify-between">
+                        <span>Ingredientes Conscientes</span>
+                        <span class="text-xs font-normal text-slate-400">Haz clic para agregar/quitar</span>
+                    </h4>
+
+                    <!-- Category: Vegetales (50%) -->
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 block mb-2">🌿 Vegetales & Hortalizas (50% objetivo)</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="toggleIngredient('Espinacas', 'veg', 20)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-emerald-500/20 border border-white/10 text-slate-200">🥗 Espinacas fresco</button>
+                            <button onclick="toggleIngredient('Brócoli', 'veg', 15)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-emerald-500/20 border border-white/10 text-slate-200">🥦 Brócoli al vapor</button>
+                            <button onclick="toggleIngredient('Zanahoria', 'veg', 15)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-emerald-500/20 border border-white/10 text-slate-200">🥕 Zanahoria rallada</button>
+                        </div>
+                    </div>
+
+                    <!-- Category: Proteínas (25%) -->
+                    <div>
+                        <span class="text-xs font-bold text-sky-400 block mb-2">🍗 Proteína Saludable (25% objetivo)</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="toggleIngredient('Pechuga de Pollo', 'prot', 25)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-sky-500/20 border border-white/10 text-slate-200">🍗 Pechuga a la plancha</button>
+                            <button onclick="toggleIngredient('Salmón', 'prot', 25)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-sky-500/20 border border-white/10 text-slate-200">🐟 Salmón rico en Omega-3</button>
+                            <button onclick="toggleIngredient('Tofu', 'prot', 25)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-sky-500/20 border border-white/10 text-slate-200">🧆 Tofu orgánico</button>
+                        </div>
+                    </div>
+
+                    <!-- Category: Carbohidratos Complejos (25%) -->
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 block mb-2">🌾 Carbohidratos Complejos (25% objetivo)</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="toggleIngredient('Quinua', 'carb', 25)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-slate-200">🍚 Quinua integral</button>
+                            <button onclick="toggleIngredient('Camote', 'carb', 25)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-amber-500/20 border border-white/10 text-slate-200">🍠 Camote horneado</button>
+                        </div>
+                    </div>
+
+                    <!-- Category: Grasas Buenas -->
+                    <div>
+                        <span class="text-xs font-bold text-purple-400 block mb-2">🥑 Grasas Saludables (Porción pequeña)</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="toggleIngredient('Aguacate', 'fat', 10)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/10 text-slate-200">🥑 Láminas de Aguacate</button>
+                            <button onclick="toggleIngredient('Aceite de Oliva', 'fat', 10)" class="ing-btn text-xs px-3 py-1.5 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/10 text-slate-200">🫒 Aceite de Oliva Extra Virgen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Plate & Nutrient Meter (Right) -->
+            <div class="lg:col-span-7">
+                <div class="glass-panel p-6 rounded-3xl border border-white/10 text-center flex flex-col items-center justify-between min-h-[420px]">
+                    <h4 class="font-display font-bold text-lg text-white mb-2">Tu Plato Balanceado</h4>
+
+                    <!-- Graphic Plate Container -->
+                    <div class="relative w-64 h-64 rounded-full border-8 border-slate-800 bg-slate-900/90 shadow-2xl flex items-center justify-center overflow-hidden my-4">
+                        <canvas id="plateCanvas" width="240" height="240"></canvas>
+                    </div>
+
+                    <!-- Balance Score & Feedback -->
+                    <div class="w-full space-y-2">
+                        <div class="flex justify-between items-center text-xs text-slate-300">
+                            <span>Balance de Nutrición Consciente</span>
+                            <span id="plateScoreText" class="font-bold text-serene-300">0%</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div id="plateScoreBar" class="h-full bg-gradient-to-r from-amber-400 via-serene-400 to-emerald-400 w-0 transition-all duration-500"></div>
+                        </div>
+                        <p id="plateAdvice" class="text-xs text-slate-400 italic pt-2">Agrega ingredientes de cada grupo para lograr la armonía nutricional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Water Tracker & Emotional Journal -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Hydration Tracker -->
+            <div class="glass-card p-5 rounded-2xl border border-white/10 flex items-center justify-between">
+                <div>
+                    <h5 class="font-display font-bold text-sm text-white flex items-center gap-2">
+                        <i class="fa-solid fa-glass-water text-cyan-400"></i> Registro Diario de Agua
+                    </h5>
+                    <p class="text-xs text-slate-400 mt-1">Meta recomendada: 8 vasos al día.</p>
+                    <div class="flex items-center gap-1.5 mt-3" id="waterGlassesContainer">
+                        <!-- Glass icons generated dynamically -->
+                    </div>
+                </div>
+                <button onclick="addWaterGlass()" class="px-4 py-2.5 rounded-xl bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 text-xs font-bold border border-cyan-500/30 transition">
+                    +1 Vaso
+                </button>
+            </div>
+
+            <!-- Quick Emotional Eating Log -->
+            <div class="glass-card p-5 rounded-2xl border border-white/10 flex items-center justify-between">
+                <div>
+                    <h5 class="font-display font-bold text-sm text-white flex items-center gap-2">
+                        <i class="fa-solid fa-book-bookmark text-amber-400"></i> Diario de Sensación Emocional
+                    </h5>
+                    <p class="text-xs text-slate-400 mt-1">¿Cómo te sentiste al comer hoy?</p>
+                    <div class="flex gap-2 mt-3">
+                        <button onclick="logMood('Tranquilo')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">😌 Tranquilo</button>
+                        <button onclick="logMood('Acelerado')" class="text-xs px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30">⚡ Acelerado</button>
+                        <button onclick="logMood('Satisfecho')" class="text-xs px-2.5 py-1 rounded-lg bg-serene-500/20 text-serene-300 border border-serene-500/30">🥗 Satisfecho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 5: DETECCIÓN TEMPRANA Y GESTIÓN DE EMOCIONES -->
+    <section id="deteccion-temprana" class="py-12 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="text-center mb-8">
+            <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Pilar de Prevención Integral</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold mt-1">Test de Detección Temprana de Estrés & Hambre Emocional</h2>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto mt-2">Responde unas breves preguntas para conocer tu nivel de sobrecarga emocional y recibir recomendaciones inmediatas de autorregulación.</p>
+        </div>
+
+        <div class="glass-panel rounded-3xl p-6 lg:p-8 border border-white/15 max-w-4xl mx-auto shadow-2xl">
+            <div id="quizContainer" class="space-y-6">
+                <!-- Question 1 -->
+                <div class="quiz-step space-y-3">
+                    <span class="text-xs font-bold text-serene-400 uppercase">Pregunta 1 de 4</span>
+                    <h4 class="font-display font-semibold text-base text-white">¿Con qué frecuencia sientes ganas impulsivas de comer dulce o carbohidratos al estar estresado/a?</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="answerQuiz(0, 1)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Rara vez o nunca</button>
+                        <button onclick="answerQuiz(0, 2)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">A veces en la semana</button>
+                        <button onclick="answerQuiz(0, 3)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Muy frecuentemente o a diario</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="quiz-step space-y-3 hidden">
+                    <span class="text-xs font-bold text-serene-400 uppercase">Pregunta 2 de 4</span>
+                    <h4 class="font-display font-semibold text-base text-white">¿Sientes tensión física (cuello, hombros, mandíbula) antes de tus comidas?</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="answerQuiz(1, 1)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">No, me siento relajado/a</button>
+                        <button onclick="answerQuiz(1, 2)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Tensión leve ocasional</button>
+                        <button onclick="answerQuiz(1, 3)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Tensión constante e intensa</button>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="quiz-step space-y-3 hidden">
+                    <span class="text-xs font-bold text-serene-400 uppercase">Pregunta 3 de 4</span>
+                    <h4 class="font-display font-semibold text-base text-white">¿Comes rápidamente sin prestar atención al sabor ni al punto de saciedad?</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="answerQuiz(2, 1)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Como pausadamente</button>
+                        <button onclick="answerQuiz(2, 2)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">A veces si tengo prisa</button>
+                        <button onclick="answerQuiz(2, 3)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Casi siempre como acelerado/a</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="quiz-step space-y-3 hidden">
+                    <span class="text-xs font-bold text-serene-400 uppercase">Pregunta 4 de 4</span>
+                    <h4 class="font-display font-semibold text-base text-white">¿Te resulta difícil identificar y nombrar la emoción que sientes en momentos de crisis?</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="answerQuiz(3, 1)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Las reconozco con claridad</button>
+                        <button onclick="answerQuiz(3, 2)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Me toma cierto tiempo</button>
+                        <button onclick="answerQuiz(3, 3)" class="quiz-btn text-xs p-3 rounded-xl bg-white/5 hover:bg-serene-500/20 border border-white/10 text-left text-slate-200">Me siento abrumado/a sin saber por qué</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Results Panel (Hidden until complete) -->
+            <div id="quizResult" class="hidden text-center space-y-6">
+                <div class="w-16 h-16 rounded-full bg-serene-500/20 text-serene-300 flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <h3 class="font-display font-bold text-2xl text-white">Resultado de Detección Temprana</h3>
+
+                <!-- Score Meter Gauge -->
+                <div class="max-w-md mx-auto space-y-2">
+                    <div class="flex justify-between text-xs text-slate-300 font-semibold">
+                        <span>Estado: <strong id="riskLevelText" class="text-serene-300">Equilibrado</strong></span>
+                        <span id="riskScorePercent">0%</span>
+                    </div>
+                    <div class="w-full h-4 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-white/10">
+                        <div id="riskGaugeBar" class="h-full rounded-full bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-500 w-0 transition-all duration-700"></div>
+                    </div>
+                </div>
+
+                <!-- Action Plan based on Slogan -->
+                <div class="bg-slate-900/80 p-5 rounded-2xl border border-white/10 text-left max-w-2xl mx-auto space-y-3">
+                    <h5 class="font-bold text-sm text-serene-300 flex items-center gap-2">
+                        <i class="fa-solid fa-compass"></i> Plan Personalizado de Acción
+                    </h5>
+                    <p id="riskPlanText" class="text-xs text-slate-300 leading-relaxed">
+                        Tus indicadores reflejan un buen nivel de autorregulación. Mantén tus hábitos de autocuidado y pausas conscientes.
+                    </p>
+                </div>
+
+                <button onclick="resetQuiz()" class="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition">
+                    Volver a realizar el Test
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-auto border-t border-white/10 py-8 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto space-y-3">
+            <div class="flex items-center justify-center gap-2 font-display font-bold text-slate-300 text-sm">
+                <i class="fa-solid fa-leaf text-serene-400"></i> SendaSerena
+            </div>
+            <p class="italic text-slate-400">"Detección temprana, autorregulación, autocuidado y gestión de emociones."</p>
+            <p>© 2026 SendaSerena. Diseñado para el bienestar integral y la salud consciente.</p>
+        </div>
+    </footer>
+
+    <script>
+        let isDarkMode = true;
+        let aiMode = 'chat';
+        let isRecording = false;
+        let speechRecognitionInstance = null;
+        let speechSynth = window.speechSynthesis;
+
+        // Gemini API configuration
+        const GEMINI_MODEL = "gemini-3-flash-preview";
+        const GEMINI_SYSTEM_INSTRUCTION = "Eres Serena, una asistente especialista en bienestar emocional y nutrición consciente. Ofreces respuestas breves, cálidas, empáticas y muy prácticas enfocadas en la 'detección temprana, autorregulación, autocuidado y gestión de emociones'. Mantén un tono tranquilizador.";
+
+        // Call simulator states
+        let isCallActive = false;
+        let callSeconds = 0;
+        let callTimerInterval = null;
+        let isCallMuted = false;
+        let isCallSpeaker = true;
+
+        // Interactive Canvas Video states
+        let currentVidIndex = 1;
+        let isVidPlaying = false;
+        let vidProgress = 0; // 0 to 100
+        let vidAnimFrame = null;
+        let overlayAnswered = false;
+
+        // Breathing exercise state
+        let isBreathing = false;
+        let breathInterval = null;
+
+        // Mindful Plate state
+        let plateItems = [];
+
+        // Web Audio Context
+        let audioCtx = null;
+        let activeSoundNodes = {};
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const html = document.documentElement;
+            const icon = document.getElementById('themeIcon');
+            if (isDarkMode) {
+                html.classList.add('dark');
+                html.classList.remove('light');
+                icon.className = 'fa-solid fa-moon text-lg';
+            } else {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                icon.className = 'fa-solid fa-sun text-lg text-amber-400';
+            }
+        }
+
+        async function fetchGeminiResponse(userPrompt) {
+            const apiKey = ""; // Canvas provides API key at runtime if left empty
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: GEMINI_SYSTEM_INSTRUCTION }] }
+            };
+
+            for (let attempt = 0; attempt < 3; attempt++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No pude procesar tu mensaje en este momento.";
+                } catch (e) {
+                    if (attempt === 2) return "Lo siento, hubo un inconveniente de conexión. Por favor intenta de nuevo.";
+                    await new Promise(res => setTimeout(res, 1000 * Math.pow(2, attempt)));
+                }
+            }
+        }
+
+        function switchAIMode(mode) {
+            aiMode = mode;
+            const chatBtn = document.getElementById('tabChat');
+            const voiceBtn = document.getElementById('tabVoice');
+            const chatCont = document.getElementById('aiChatContainer');
+            const voiceCont = document.getElementById('aiVoiceContainer');
+
+            if (mode === 'chat') {
+                chatBtn.className = "flex-1 min-w-[120px] py-3 px-4 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 bg-serene-500/20 text-serene-300 border border-serene-500/40";
+                voiceBtn.className = "flex-1 min-w-[120px] py-3 px-4 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 bg-white/5 text-slate-400 hover:text-white border border-transparent";
+                chatCont.classList.remove('hidden');
+                voiceCont.classList.add('hidden');
+            } else {
+                voiceBtn.className = "flex-1 min-w-[120px] py-3 px-4 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 bg-serene-500/20 text-serene-300 border border-serene-500/40";
+                chatBtn.className = "flex-1 min-w-[120px] py-3 px-4 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 bg-white/5 text-slate-400 hover:text-white border border-transparent";
+                voiceCont.classList.remove('hidden');
+                chatCont.classList.add('hidden');
+            }
+        }
+
+        function setQuickPrompt(text) {
+            document.getElementById('chatInput').value = text;
+        }
+
+        async function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chatHistory = document.getElementById('chatHistory');
+
+            // Append User Message
+            const userBubble = document.createElement('div');
+            userBubble.className = "flex items-start gap-3 justify-end";
+            userBubble.innerHTML = `
+                <div class="bg-serene-500/20 text-serene-200 border border-serene-500/30 p-3.5 rounded-2xl rounded-tr-none max-w-[85%]">
+                    ${escapeHtml(text)}
+                </div>
+            `;
+            chatHistory.appendChild(userBubble);
+            input.value = '';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            // Typing Indicator
+            const typingBubble = document.createElement('div');
+            typingBubble.className = "flex items-start gap-3";
+            typingBubble.id = "typingIndicator";
+            typingBubble.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-serene-500 flex items-center justify-center text-slate-950 font-bold shrink-0">
+                    <i class="fa-solid fa-leaf text-xs"></i>
+                </div>
+                <div class="bg-white/10 p-3.5 rounded-2xl rounded-tl-none text-slate-400 text-xs italic">
+                    Serena está reflexionando...
+                </div>
+            `;
+            chatHistory.appendChild(typingBubble);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            // Call Gemini
+            const responseText = await fetchGeminiResponse(text);
+            document.getElementById('typingIndicator')?.remove();
+
+            // Append AI Response
+            const aiBubble = document.createElement('div');
+            aiBubble.className = "flex items-start gap-3";
+            aiBubble.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-serene-500 flex items-center justify-center text-slate-950 font-bold shrink-0">
+                    <i class="fa-solid fa-leaf text-xs"></i>
+                </div>
+                <div class="bg-white/10 p-3.5 rounded-2xl rounded-tl-none max-w-[85%] text-slate-200">
+                    ${formatMarkdown(responseText)}
+                </div>
+            `;
+            chatHistory.appendChild(aiBubble);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function formatMarkdown(str) {
+            return str
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+        }
+
+        function toggleVoiceRecording() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("Tu navegador no soporta el reconocimiento de voz web.");
+                return;
+            }
+
+            if (isRecording) {
+                stopVoiceRecording();
+            } else {
+                startVoiceRecording();
+            }
+        }
+
+        function startVoiceRecording() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            speechRecognitionInstance = new SpeechRecognition();
+            speechRecognitionInstance.lang = 'es-ES';
+            speechRecognitionInstance.interimResults = true;
+
+            document.getElementById('recordingPing').classList.remove('hidden');
+            document.getElementById('recordIcon').className = 'fa-solid fa-square';
+            document.getElementById('voiceStatus').innerText = "Escuchando... Di tu consulta";
+
+            speechRecognitionInstance.onresult = (event) => {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                document.getElementById('voiceTranscript').innerText = `"${transcript}"`;
+            };
+
+            speechRecognitionInstance.onend = async () => {
+                stopVoiceRecording();
+                const text = document.getElementById('voiceTranscript').innerText.replace(/"/g, '');
+                if (text && text !== '...') {
+                    document.getElementById('voiceStatus').innerText = "Serena está analizando tu mensaje...";
+                    const reply = await fetchGeminiResponse(text);
+                    document.getElementById('voiceStatus').innerText = "Respondiendo en voz alta...";
+                    speakText(reply);
+                }
+            };
+
+            speechRecognitionInstance.start();
+            isRecording = true;
+        }
+
+        function stopVoiceRecording() {
+            if (speechRecognitionInstance) {
+                speechRecognitionInstance.stop();
+            }
+            document.getElementById('recordingPing').classList.add('hidden');
+            document.getElementById('recordIcon').className = 'fa-solid fa-microphone';
+            isRecording = false;
+        }
+
+        function speakText(text) {
+            if (!speechSynth) return;
+            speechSynth.cancel(); // Stop ongoing speech
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.95;
+            utterance.pitch = 1.0;
+            speechSynth.speak(utterance);
+        }
+
+        function openCallModal() {
+            document.getElementById('callModal').classList.remove('hidden');
+            startCallSession();
+        }
+
+        function startCallSession() {
+            isCallActive = true;
+            callSeconds = 0;
+            document.getElementById('callStateLabel').innerText = "En línea con Serena";
+            document.getElementById('callSubtitleText').innerText = "Hola, te escucho con atención. ¿De qué te gustaría hablar?";
+            speakText("Hola, soy Serena. Estoy en línea para escucharte. ¿Cómo te sientes hoy?");
+
+            // Start Timer
+            clearInterval(callTimerInterval);
+            callTimerInterval = setInterval(() => {
+                callSeconds++;
+                const mins = String(Math.floor(callSeconds / 60)).padStart(2, '0');
+                const secs = String(callSeconds % 60).padStart(2, '0');
+                document.getElementById('callTimer').innerText = `${mins}:${secs}`;
+            }, 1000);
+
+            startContinuousCallListening();
+        }
+
+        function startContinuousCallListening() {
+            if (!isCallActive) return;
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return;
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const rec = new SpeechRecognition();
+            rec.lang = 'es-ES';
+            rec.interimResults = false;
+
+            rec.onstart = () => {
+                document.getElementById('callStateLabel').innerText = "Escuchando...";
+            };
+
+            rec.onresult = async (e) => {
+                const userSpeech = e.results[0][0].transcript;
+                document.getElementById('callSubtitleText').innerText = `Tú: "${userSpeech}"`;
+                document.getElementById('callStateLabel').innerText = "Serena Pensando...";
+                
+                const aiReply = await fetchGeminiResponse(userSpeech);
+                document.getElementById('callSubtitleText').innerText = `Serena: "${aiReply}"`;
+                document.getElementById('callStateLabel').innerText = "Serena Hablando...";
+                
+                speakText(aiReply);
+            };
+
+            rec.onend = () => {
+                if (isCallActive) {
+                    setTimeout(() => startContinuousCallListening(), 2000);
+                }
+            };
+
+            rec.start();
+        }
+
+        function toggleCallMute() {
+            isCallMuted = !isCallMuted;
+            const icon = document.getElementById('callMuteIcon');
+            const btn = document.getElementById('callMuteBtn');
+            if (isCallMuted) {
+                icon.className = "fa-solid fa-microphone-slash text-rose-400";
+                btn.className = "w-12 h-12 rounded-full bg-rose-500/20 text-rose-300 flex items-center justify-center transition";
+            } else {
+                icon.className = "fa-solid fa-microphone text-white";
+                btn.className = "w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition";
+            }
+        }
+
+        function toggleCallSpeaker() {
+            isCallSpeaker = !isCallSpeaker;
+            const btn = document.getElementById('callSpeakerBtn');
+            if (!isCallSpeaker) {
+                btn.className = "w-12 h-12 rounded-full bg-white/10 text-slate-400 flex items-center justify-center transition";
+            } else {
+                btn.className = "w-12 h-12 rounded-full bg-serene-500/20 text-serene-300 flex items-center justify-center transition";
+            }
+        }
+
+        function endCall() {
+            isCallActive = false;
+            clearInterval(callTimerInterval);
+            speechSynth.cancel();
+            document.getElementById('callModal').classList.add('hidden');
+        }
+
+        function loadInteractiveVideo(index) {
+            currentVidIndex = index;
+            vidProgress = 0;
+            overlayAnswered = false;
+
+            const btn1 = document.getElementById('vidBtn1');
+            const btn2 = document.getElementById('vidBtn2');
+            const title = document.getElementById('vidTitle');
+
+            if (index === 1) {
+                btn1.className = "w-full text-left p-4 rounded-2xl glass-card border-2 border-serene-500/80 bg-serene-500/10 transition flex items-center gap-4";
+                btn2.className = "w-full text-left p-4 rounded-2xl glass-card border border-white/10 hover:border-calm-400/50 transition flex items-center gap-4";
+                title.innerText = "Video 1: Mindful Eating & Plato Saludable";
+            } else {
+                btn2.className = "w-full text-left p-4 rounded-2xl glass-card border-2 border-calm-500/80 bg-calm-500/10 transition flex items-center gap-4";
+                btn1.className = "w-full text-left p-4 rounded-2xl glass-card border border-white/10 hover:border-serene-400/50 transition flex items-center gap-4";
+                title.innerText = "Video 2: Viaje de Autorregulación Visual";
+            }
+
+            drawVideoFrame();
+        }
+
+        function toggleVideoPlay() {
+            isVidPlaying = !isVidPlaying;
+            const btnIcon = document.querySelector('#vidPlayBtn i');
+            if (isVidPlaying) {
+                btnIcon.className = "fa-solid fa-pause";
+                animateVideoLoop();
+            } else {
+                btnIcon.className = "fa-solid fa-play";
+                cancelAnimationFrame(vidAnimFrame);
+            }
+        }
+
+        function restartVideo() {
+            vidProgress = 0;
+            overlayAnswered = false;
+            document.getElementById('videoOverlay').classList.add('hidden');
+            drawVideoFrame();
+        }
+
+        function animateVideoLoop() {
+            if (!isVidPlaying) return;
+
+            vidProgress += 0.15;
+            if (vidProgress >= 100) {
+                vidProgress = 100;
+                isVidPlaying = false;
+                document.querySelector('#vidPlayBtn i').className = "fa-solid fa-play";
+            }
+
+            // Pause at 50% for interactive check in Video 1
+            if (currentVidIndex === 1 && Math.floor(vidProgress) === 50 && !overlayAnswered) {
+                isVidPlaying = false;
+                document.querySelector('#vidPlayBtn i').className = "fa-solid fa-play";
+                document.getElementById('videoOverlay').classList.remove('hidden');
+            }
+
+            document.getElementById('vidProgressBar').style.width = `${vidProgress}%`;
+            document.getElementById('vidCurrentTime').innerText = `00:${String(Math.floor(vidProgress * 0.6)).padStart(2, '0')}`;
+
+            drawVideoFrame();
+
+            if (isVidPlaying) {
+                vidAnimFrame = requestAnimationFrame(animateVideoLoop);
+            }
+        }
+
+        function resumeVideoWithChoice(type) {
+            overlayAnswered = true;
+            document.getElementById('videoOverlay').classList.add('hidden');
+            toggleVideoPlay();
+        }
+
+        function drawVideoFrame() {
+            const canvas = document.getElementById('videoCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
+
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            if (currentVidIndex === 1) {
+                // Video 1: Animated Mindful Eating Scene
+                ctx.fillStyle = '#0f172a';
+                ctx.fillRect(0, 0, w, h);
+
+                // Animated background glow
+                const grad = ctx.createRadialGradient(w/2, h/2, 20, w/2, h/2, w/2);
+                grad.addColorStop(0, '#14b8a633');
+                grad.addColorStop(1, '#00000000');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, w, h);
+
+                // Animated Plate Graphics
+                ctx.save();
+                ctx.translate(w/2, h/2);
+                ctx.rotate((vidProgress * Math.PI) / 180);
+
+                ctx.strokeStyle = '#2dd4bf';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.arc(0, 0, 80 + Math.sin(vidProgress * 0.1) * 5, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.restore();
+
+                // Video Labels on Canvas
+                ctx.fillStyle = '#f8fafc';
+                ctx.font = 'bold 16px Outfit, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Paso 1: Identifica el Hambre Real vs. Emocional', w/2, h/2 - 100);
+
+                ctx.font = '12px Plus Jakarta Sans, sans-serif';
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText(`Progreso de Aprendizaje: ${Math.floor(vidProgress)}%`, w/2, h/2 + 110);
+
+            } else {
+                // Video 2: Animated Particle Self-Regulation Journey
+                ctx.fillStyle = '#090d16';
+                ctx.fillRect(0, 0, w, h);
+
+                const time = Date.now() * 0.002;
+                for (let i = 0; i < 30; i++) {
+                    const x = (w / 2) + Math.cos(time + i) * (i * 6 + vidProgress);
+                    const y = (h / 2) + Math.sin(time + i * 0.5) * (i * 6 + vidProgress);
+                    const r = 4 + Math.sin(time + i) * 2;
+
+                    ctx.fillStyle = i % 2 === 0 ? '#8b5cf6' : '#2dd4bf';
+                    ctx.beginPath();
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 16px Outfit, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Sincronización con el Flujo Visual', w/2, 40);
+            }
+        }
+
+        let breathPhase = 'inhale'; // inhale, hold, exhale, hold2
+        let breathTimeLeft = 4;
+
+        function toggleBreathing() {
+            isBreathing = !isBreathing;
+            const btn = document.getElementById('breathStartBtn');
+            if (isBreathing) {
+                btn.innerText = "Detener Ejercicio";
+                btn.className = "px-6 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm transition";
+                runBreathingCycle();
+            } else {
+                btn.innerText = "Comenzar Ejercicio";
+                btn.className = "px-6 py-2.5 rounded-xl bg-serene-500 hover:bg-serene-400 text-slate-950 font-bold text-sm transition";
+                clearInterval(breathInterval);
+                document.getElementById('breathPhase').innerText = "Listo";
+                document.getElementById('breathTimer').innerText = "0";
+                drawBreathingCanvas(0);
+            }
+        }
+
+        function runBreathingCycle() {
+            const technique = document.getElementById('breathTechnique').value;
+            let inhaleT = 4, holdT = 7, exhaleT = 8, hold2T = 0;
+            if (technique === 'box') {
+                inhaleT = 4; holdT = 4; exhaleT = 4; hold2T = 4;
+            }
+
+            breathPhase = 'inhale';
+            breathTimeLeft = inhaleT;
+
+            clearInterval(breathInterval);
+            breathInterval = setInterval(() => {
+                breathTimeLeft--;
+                if (breathTimeLeft <= 0) {
+                    if (breathPhase === 'inhale') {
+                        breathPhase = 'hold';
+                        breathTimeLeft = holdT;
+                    } else if (breathPhase === 'hold') {
+                        breathPhase = 'exhale';
+                        breathTimeLeft = exhaleT;
+                    } else if (breathPhase === 'exhale') {
+                        if (hold2T > 0) {
+                            breathPhase = 'hold2';
+                            breathTimeLeft = hold2T;
+                        } else {
+                            breathPhase = 'inhale';
+                            breathTimeLeft = inhaleT;
+                        }
+                    } else if (breathPhase === 'hold2') {
+                        breathPhase = 'inhale';
+                        breathTimeLeft = inhaleT;
+                    }
+                }
+
+                document.getElementById('breathTimer').innerText = breathTimeLeft;
+                if (breathPhase === 'inhale') document.getElementById('breathPhase').innerText = "Inhala...";
+                if (breathPhase === 'hold' || breathPhase === 'hold2') document.getElementById('breathPhase').innerText = "Mantén...";
+                if (breathPhase === 'exhale') document.getElementById('breathPhase').innerText = "Exhala...";
+
+                const expansionFactor = breathPhase === 'inhale' ? (4 - breathTimeLeft) / 4 : (breathPhase === 'exhale' ? breathTimeLeft / 8 : 1);
+                drawBreathingCanvas(expansionFactor);
+            }, 1000);
+        }
+
+        function drawBreathingCanvas(factor) {
+            const canvas = document.getElementById('breathCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const baseRadius = 50;
+            const radius = baseRadius + (factor * 40);
+
+            const grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, radius);
+            grad.addColorStop(0, '#5eead4');
+            grad.addColorStop(1, '#0d948811');
+
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.strokeStyle = '#2dd4bf';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+
+        function initAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function updateSoundVolume(type, val) {
+            initAudioContext();
+            const vol = val / 100;
+
+            if (vol > 0) {
+                if (!activeSoundNodes[type]) {
+                    startProceduralSound(type);
+                }
+                if (activeSoundNodes[type] && activeSoundNodes[type].gain) {
+                    activeSoundNodes[type].gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+                }
+            } else {
+                if (activeSoundNodes[type]) {
+                    activeSoundNodes[type].node.stop();
+                    delete activeSoundNodes[type];
+                }
+            }
+        }
+
+        function startProceduralSound(type) {
+            if (!audioCtx) return;
+
+            const gainNode = audioCtx.createGain();
+            gainNode.connect(audioCtx.destination);
+
+            if (type === 'rain' || type === 'ocean' || type === 'fire') {
+                // White noise buffer
+                const bufferSize = audioCtx.sampleRate * 2;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+                noise.loop = true;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = type === 'rain' ? 'lowpass' : 'bandpass';
+                filter.frequency.value = type === 'rain' ? 800 : 400;
+
+                noise.connect(filter);
+                filter.connect(gainNode);
+                noise.start();
+
+                activeSoundNodes[type] = { node: noise, gain: gainNode };
+            } else if (type === 'bowl') {
+                // Tibetan bowl sine oscillator
+                const osc = audioCtx.createOscillator();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(216, audioCtx.currentTime); // 216Hz relaxing tone
+
+                osc.connect(gainNode);
+                osc.start();
+
+                activeSoundNodes[type] = { node: osc, gain: gainNode };
+            }
+        }
+
+        function stopAllSounds() {
+            Object.keys(activeSoundNodes).forEach(k => {
+                activeSoundNodes[k].node.stop();
+            });
+            activeSoundNodes = {};
+            document.getElementById('volRain').value = 0;
+            document.getElementById('volOcean').value = 0;
+            document.getElementById('volBowl').value = 0;
+            document.getElementById('volFire').value = 0;
+        }
+
+        function toggleIngredient(name, cat, percent) {
+            const idx = plateItems.findIndex(i => i.name === name);
+            if (idx > -1) {
+                plateItems.splice(idx, 1);
+            } else {
+                plateItems.push({ name, cat, percent });
+            }
+            renderPlateCanvas();
+        }
+
+        function renderPlateCanvas() {
+            const canvas = document.getElementById('plateCanvas');
+            const ctx = canvas.getContext('2d');
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const r = 100;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Base Plate
+            ctx.fillStyle = '#1e293b';
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.fill();
+
+            if (plateItems.length === 0) {
+                ctx.fillStyle = '#64748b';
+                ctx.font = '12px Plus Jakarta Sans, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Plato Vacío', cx, cy);
+                document.getElementById('plateScoreBar').style.width = '0%';
+                document.getElementById('plateScoreText').innerText = '0%';
+                return;
+            }
+
+            let startAngle = 0;
+            let totalPercent = 0;
+
+            const catColors = { veg: '#2dd4bf', prot: '#38bdf8', carb: '#fbbf24', fat: '#c084fc' };
+
+            plateItems.forEach(item => {
+                const angle = (item.percent / 100) * (Math.PI * 2);
+                ctx.fillStyle = catColors[item.cat] || '#ffffff';
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, r - 5, startAngle, startAngle + angle);
+                ctx.closePath();
+                ctx.fill();
+
+                startAngle += angle;
+                totalPercent += item.percent;
+            });
+
+            const score = Math.min(totalPercent, 100);
+            document.getElementById('plateScoreBar').style.width = `${score}%`;
+            document.getElementById('plateScoreText').innerText = `${score}%`;
+
+            if (score >= 80) {
+                document.getElementById('plateAdvice').innerText = "¡Excelente equilibrio nutricional! Proporciones óptimas para tu cuerpo.";
+            } else {
+                document.getElementById('plateAdvice').innerText = "Continúa agregando más variedad de vegetales y proteínas limpias.";
+            }
+        }
+
+        // Water glasses tracker
+        let waterCount = 0;
+        function initWaterGlasses() {
+            const cont = document.getElementById('waterGlassesContainer');
+            cont.innerHTML = '';
+            for (let i = 0; i < 8; i++) {
+                const glass = document.createElement('i');
+                glass.className = i < waterCount ? "fa-solid fa-glass-water text-cyan-400 text-lg" : "fa-solid fa-glass-water text-slate-700 text-lg";
+                cont.appendChild(glass);
+            }
+        }
+
+        function addWaterGlass() {
+            if (waterCount < 8) {
+                waterCount++;
+                initWaterGlasses();
+            }
+        }
+
+        function logMood(mood) {
+            alert(`Registro guardado: Te sentiste '${mood}' en tu última comida.`);
+        }
+
+        let quizAnswers = [];
+
+        function answerQuiz(stepIndex, scoreValue) {
+            quizAnswers[stepIndex] = scoreValue;
+            const steps = document.querySelectorAll('.quiz-step');
+            steps[stepIndex].classList.add('hidden');
+
+            if (stepIndex + 1 < steps.length) {
+                steps[stepIndex + 1].classList.remove('hidden');
+            } else {
+                calculateQuizResult();
+            }
+        }
+
+        function calculateQuizResult() {
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('quizResult').classList.remove('hidden');
+
+            const totalScore = quizAnswers.reduce((a, b) => a + b, 0); // min 4, max 12
+            const percent = Math.round(((totalScore - 4) / 8) * 100);
+
+            document.getElementById('riskGaugeBar').style.width = `${percent}%`;
+            document.getElementById('riskScorePercent').innerText = `${percent}%`;
+
+            const riskLevelText = document.getElementById('riskLevelText');
+            const planText = document.getElementById('riskPlanText');
+
+            if (percent < 35) {
+                riskLevelText.innerText = "Bajo / Estabilidad Alta";
+                riskLevelText.className = "text-emerald-400 font-bold";
+                planText.innerHTML = "Tu nivel de sobrecarga es bajo. Continúa practicando el <strong>autocuidado</strong> preventivo e intégrate a los <em>ejercicios de respiración</em> para mantener tu serenidad.";
+            } else if (percent < 70) {
+                riskLevelText.innerText = "Moderado / Alerta Temprana";
+                riskLevelText.className = "text-amber-400 font-bold";
+                planText.innerHTML = "Se detectan señales iniciales de estrés y hambre emocional. Activa tu estrategia de <strong>detección temprana</strong> realizando 5 minutos de respiración 4-7-8 antes de comer.";
+            } else {
+                riskLevelText.innerText = "Elevado / Requiere Autorregulación";
+                riskLevelText.className = "text-rose-400 font-bold";
+                planText.innerHTML = "Tus niveles de tensión son elevados. Te recomendamos iniciar una <strong>llamada con Serena IA</strong> para acompañamiento empático y practicar el <em>Video de Autorregulación Visual</em> inmediatamente.";
+            }
+        }
+
+        function resetQuiz() {
+            quizAnswers = [];
+            document.getElementById('quizResult').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            const steps = document.querySelectorAll('.quiz-step');
+            steps.forEach((s, idx) => {
+                if (idx === 0) s.classList.remove('hidden');
+                else s.classList.add('hidden');
+            });
+        }
+
+        window.onload = function () {
+            drawBreathingCanvas(0);
+            renderPlateCanvas();
+            initWaterGlasses();
+            loadInteractiveVideo(1);
+        };
+    </script>
+</body>
+</html>
