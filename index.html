@@ -8,210 +8,372 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    @keyframes breatheAnimation {
-      0%, 100% { transform: scale(1); background-color: #ccfbf1; }
-      21% { transform: scale(1.4); background-color: #99f6e4; } /* 4s Inhala */
-      58% { transform: scale(1.4); background-color: #5eead4; } /* 7s Retén */
-      100% { transform: scale(1); background-color: #ccfbf1; } /* 8s Exhala */
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .circle-expand {
+      transform: scale(1.45);
+      background-color: #99f6e4 !important;
+      border-color: #0d9488 !important;
+      box-shadow: 0 0 45px rgba(20, 184, 166, 0.45);
     }
-    .animating-breath {
-      animation: breatheAnimation 19s infinite ease-in-out;
+    .circle-hold {
+      transform: scale(1.45);
+      background-color: #5eead4 !important;
+      border-color: #0f766e !important;
+      box-shadow: 0 0 55px rgba(13, 148, 136, 0.6);
+    }
+    .circle-shrink {
+      transform: scale(1);
+      background-color: #ccfbf1 !important;
+      border-color: #14b8a6 !important;
+      box-shadow: 0 0 15px rgba(20, 184, 166, 0.2);
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-gradient-to-b from-teal-50/60 via-slate-50 to-blue-50/40 text-slate-700 min-h-screen flex flex-col justify-between antialiased">
 
-  <!-- Encabezado & Disclaimer Clínico Obligatorio -->
-  <header class="bg-white border-b border-slate-200 py-6 px-4 shadow-sm text-center">
-    <div class="max-w-2xl mx-auto">
-      <span class="text-xs uppercase tracking-widest font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-        Hackathon UCV · Equipo KarenCode
-      </span>
-      <h1 class="text-3xl font-extrabold text-slate-800 mt-3">CalmPulse UCV</h1>
-      <p class="text-sm text-slate-500 mt-1">Estación digital de autorregulación emocional y descarga mental</p>
+  <!-- Header & Identidad CalmCode -->
+  <header class="py-6 px-4 text-center">
+    <div class="max-w-xl mx-auto">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-100/80 text-teal-800 text-xs font-semibold tracking-wide shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
+        HACKATHON UCV · EQUIPO CALMCODE
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-800 tracking-tight mt-3">CalmPulse UCV</h1>
+      <p class="text-sm text-slate-500 mt-1">Estación digital de autorregulación emocional y pausa consciente</p>
       
-      <div class="mt-4 bg-amber-50 border-l-4 border-amber-400 p-3 text-xs text-amber-900 rounded text-left">
-        <strong>Aviso Institucional:</strong> Esta herramienta es un apoyo psicoeducativo de bienestar. No constituye diagnóstico médico, tratamiento psicológico ni sustituye la atención de un profesional colegiado.
+      <!-- Aviso Institucional -->
+      <div class="mt-4 bg-amber-50/90 border border-amber-200 text-amber-900 px-4 py-2.5 rounded-xl text-xs text-left leading-relaxed shadow-sm">
+        <span class="font-bold">Aviso Institucional:</span> Espacio psicoeducativo de apoyo emocional. No emite diagnósticos médicos ni sustituye la atención especializada de un profesional de la salud colegiado.
       </div>
     </div>
   </header>
 
-  <!-- Contenido Central -->
-  <main class="max-w-2xl mx-auto px-4 py-8 w-full space-y-8">
+  <!-- Contenedor Principal -->
+  <main class="max-w-xl mx-auto px-4 pb-12 w-full space-y-6">
+
+    <!-- Tarjeta: Paisaje Sonoro Anti-estrés -->
+    <div class="bg-white/80 backdrop-blur border border-teal-100/80 p-3.5 rounded-2xl shadow-sm flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-lg">🌿</span>
+        <div>
+          <p class="text-xs font-bold text-slate-700">Ruido Blanco Relajante</p>
+          <p class="text-[11px] text-slate-400">Sonido suave para calmar la mente</p>
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <button id="soundRain" onclick="toggleNoise('rain')" class="text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-teal-50 transition-all font-medium text-slate-600">
+          🌧️ Lluvia
+        </button>
+        <button id="soundOcean" onclick="toggleNoise('ocean')" class="text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-teal-50 transition-all font-medium text-slate-600">
+          🌊 Olas
+        </button>
+      </div>
+    </div>
 
     <!-- Módulo 1: Respiración Guiada 4-7-8 -->
-    <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center">
-      <h2 class="text-xl font-bold text-slate-700">Técnica de Respiración 4-7-8</h2>
-      <p class="text-xs text-slate-500 mb-6">Regula tu sistema nervioso: Inhala por la nariz (4s), retén el aire (7s) y exhala por la boca (8s).</p>
+    <section class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-100 text-center relative overflow-hidden">
+      <h2 class="text-lg font-bold text-slate-800">Respiración 4-7-8</h2>
+      <p class="text-xs text-slate-400 mt-0.5">Disminuye el cortisol y calma las palpitaciones en 1 minuto</p>
 
-      <div class="flex flex-col items-center justify-center my-6">
-        <div id="circle" class="w-36 h-36 rounded-full bg-teal-100 border-4 border-teal-500 flex items-center justify-center shadow-inner transition-all">
-          <span id="instructionText" class="text-sm font-bold text-teal-900">Listo</span>
+      <!-- Esfera de Respiración -->
+      <div class="flex flex-col items-center justify-center my-8">
+        <div id="breathCircle" class="w-40 h-40 rounded-full bg-teal-100 border-4 border-teal-400 flex flex-col items-center justify-center transition-all duration-1000 ease-in-out circle-shrink">
+          <span id="breathPhase" class="text-base font-extrabold text-teal-900 transition-all">Listo</span>
+          <span id="breathCount" class="text-2xl font-bold text-teal-700 mt-1">4-7-8</span>
         </div>
-        <p id="timerText" class="text-xs font-medium text-slate-400 mt-4">Presiona iniciar para realizar el ciclo</p>
+        <p id="breathTip" class="text-xs text-slate-400 mt-5 font-medium transition-all">Presiona Iniciar para comenzar a sincronizar</p>
       </div>
 
-      <div class="space-x-3">
-        <button id="btnStart" onclick="startBreathing()" class="px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm rounded-lg transition-colors shadow">
+      <div class="flex justify-center gap-3">
+        <button id="btnStartBreath" onclick="startBreathingCycle()" class="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-teal-600/20 active:scale-95">
           Iniciar Ciclo
         </button>
-        <button id="btnStop" onclick="stopBreathing()" class="px-5 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-sm rounded-lg transition-colors">
-          Detener
+        <button id="btnStopBreath" onclick="stopBreathingCycle()" class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95">
+          Pausar
         </button>
       </div>
     </section>
 
-    <!-- Módulo 2: Formulario de Desahogo (Anonimizado hacia Supabase) -->
-    <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-      <h2 class="text-xl font-bold text-slate-700 mb-1">Vaciado Mental y Check-in</h2>
-      <p class="text-xs text-slate-500 mb-6">Descarga lo que satura tu mente sin guardar DNI, teléfonos ni nombres reales.</p>
+    <!-- Módulo 2: Vaciado Mental & Descarga Rápida -->
+    <section class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-100">
+      <h2 class="text-lg font-bold text-slate-800">Vaciado Mental Anónimo</h2>
+      <p class="text-xs text-slate-400 mt-0.5 mb-6">Suelta pensamientos o tareas que te agobian (sin DNI ni nombres reales)</p>
 
-      <form id="mentalForm" onsubmit="saveEntry(event)" class="space-y-4">
+      <form id="mentalForm" onsubmit="submitEntry(event)" class="space-y-4">
+        <!-- Alias -->
         <div>
-          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Pseudónimo o Alias</label>
-          <input type="text" id="inputNombre" required maxlength="60" placeholder="Ej. EstudianteVallejo01" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Pseudónimo o Alias</label>
+          <input type="text" id="inputNombre" required maxlength="50" placeholder="Ej. ArquitectoVallejo_26" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
         </div>
 
+        <!-- Calma actual con emojis amigables -->
         <div>
-          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nivel de Calma (1 = Muy Estresado / 5 = En Calma)</label>
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">¿Cómo te sientes en este instante?</label>
           <div class="grid grid-cols-5 gap-2 text-center">
-            <label class="border p-2 rounded-lg cursor-pointer hover:bg-slate-50 text-xs font-semibold">
-              <input type="radio" name="animo" value="1" required class="block mx-auto mb-1"> 1
+            <label class="border border-slate-200 rounded-xl p-2.5 cursor-pointer hover:bg-teal-50 transition-all flex flex-col items-center">
+              <input type="radio" name="animo" value="1" required class="mb-1 text-teal-600 focus:ring-teal-500">
+              <span class="text-base">😫</span>
+              <span class="text-[10px] text-slate-400 font-semibold mt-1">1</span>
             </label>
-            <label class="border p-2 rounded-lg cursor-pointer hover:bg-slate-50 text-xs font-semibold">
-              <input type="radio" name="animo" value="2" class="block mx-auto mb-1"> 2
+            <label class="border border-slate-200 rounded-xl p-2.5 cursor-pointer hover:bg-teal-50 transition-all flex flex-col items-center">
+              <input type="radio" name="animo" value="2" class="mb-1 text-teal-600 focus:ring-teal-500">
+              <span class="text-base">😟</span>
+              <span class="text-[10px] text-slate-400 font-semibold mt-1">2</span>
             </label>
-            <label class="border p-2 rounded-lg cursor-pointer hover:bg-slate-50 text-xs font-semibold">
-              <input type="radio" name="animo" value="3" class="block mx-auto mb-1"> 3
+            <label class="border border-slate-200 rounded-xl p-2.5 cursor-pointer hover:bg-teal-50 transition-all flex flex-col items-center">
+              <input type="radio" name="animo" value="3" class="mb-1 text-teal-600 focus:ring-teal-500">
+              <span class="text-base">😐</span>
+              <span class="text-[10px] text-slate-400 font-semibold mt-1">3</span>
             </label>
-            <label class="border p-2 rounded-lg cursor-pointer hover:bg-slate-50 text-xs font-semibold">
-              <input type="radio" name="animo" value="4" class="block mx-auto mb-1"> 4
+            <label class="border border-slate-200 rounded-xl p-2.5 cursor-pointer hover:bg-teal-50 transition-all flex flex-col items-center">
+              <input type="radio" name="animo" value="4" class="mb-1 text-teal-600 focus:ring-teal-500">
+              <span class="text-base">🙂</span>
+              <span class="text-[10px] text-slate-400 font-semibold mt-1">4</span>
             </label>
-            <label class="border p-2 rounded-lg cursor-pointer hover:bg-slate-50 text-xs font-semibold">
-              <input type="radio" name="animo" value="5" class="block mx-auto mb-1"> 5
+            <label class="border border-slate-200 rounded-xl p-2.5 cursor-pointer hover:bg-teal-50 transition-all flex flex-col items-center">
+              <input type="radio" name="animo" value="5" class="mb-1 text-teal-600 focus:ring-teal-500">
+              <span class="text-base">😌</span>
+              <span class="text-[10px] text-slate-400 font-semibold mt-1">5</span>
             </label>
           </div>
         </div>
 
+        <!-- Chips interactivos rápidos -->
         <div>
-          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Pensamiento o Tarea Pendiente a Soltar</label>
-          <textarea id="inputNota" rows="3" maxlength="500" placeholder="Escribe aquí lo que te preocupa para liberarlo de tu mente..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Presión principal (clic rápido)</label>
+          <div class="flex flex-wrap gap-1.5 mb-2">
+            <button type="button" onclick="setQuickTopic('Sobrecarga de entregas en la misma semana')" class="text-[11px] bg-slate-100 hover:bg-teal-100 text-slate-600 px-2.5 py-1 rounded-lg transition-colors">📚 Entregas juntas</button>
+            <button type="button" onclick="setQuickTopic('Exámenes parciales y falta de tiempo')" class="text-[11px] bg-slate-100 hover:bg-teal-100 text-slate-600 px-2.5 py-1 rounded-lg transition-colors">⏳ Exámenes</button>
+            <button type="button" onclick="setQuickTopic('Falta de coordinación en trabajos de grupo')" class="text-[11px] bg-slate-100 hover:bg-teal-100 text-slate-600 px-2.5 py-1 rounded-lg transition-colors">👥 Grupo no avanza</button>
+            <button type="button" onclick="setQuickTopic('Sensación de cansancio acumulado')" class="text-[11px] bg-slate-100 hover:bg-teal-100 text-slate-600 px-2.5 py-1 rounded-lg transition-colors">💤 Cansancio</button>
+          </div>
+          <textarea id="inputNota" rows="2" maxlength="400" placeholder="Escribe aquí tu pensamiento para soltarlo..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"></textarea>
         </div>
 
-        <button type="submit" id="btnSubmit" class="w-full py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold text-sm rounded-lg transition-colors shadow">
-          Guardar y Liberar
+        <button type="submit" id="btnSubmitForm" class="w-full py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md active:scale-[0.99]">
+          Guardar y Liberar Mente
         </button>
       </form>
 
-      <div id="statusMsg" class="mt-3 text-center text-xs font-bold hidden"></div>
+      <div id="statusAlert" class="mt-3 text-center text-xs font-bold hidden"></div>
 
-      <!-- Registros traídos desde la base de datos -->
-      <div class="mt-8 border-t border-slate-100 pt-6">
-        <h3 class="text-sm font-bold text-slate-700 mb-3">Comunidad · Descargas recientes:</h3>
-        <div id="entriesList" class="space-y-3">
-          <p class="text-xs text-slate-400 italic">Cargando notas...</p>
+      <!-- Muro de Descargas Colectivas -->
+      <div class="mt-8 border-t border-slate-100 pt-5">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Comunidad UCV · Desahogos recientes</h3>
+          <span class="text-[10px] text-teal-600 font-semibold bg-teal-50 px-2 py-0.5 rounded-full">En Vivo</span>
+        </div>
+        <div id="entriesFeed" class="space-y-2">
+          <p class="text-xs text-slate-400 italic">Cargando pensamientos compartidos...</p>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Banner Fijo de Emergencia Clínica -->
-  <footer class="bg-rose-50 border-t border-rose-200 py-3 px-4 text-center sticky bottom-0 z-50">
-    <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-rose-900 space-y-1 sm:space-y-0">
-      <span>¿En situación de crisis? Llama al <strong>113 (Opción 5)</strong> - MINSA.</span>
-      <span class="font-bold underline">Servicios de Salud UCV</span>
+  <!-- Banner Fijo de Seguridad Clínica y Contacto -->
+  <footer class="bg-rose-50/90 backdrop-blur border-t border-rose-200/80 py-2.5 px-4 sticky bottom-0 z-50">
+    <div class="max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-rose-900 gap-1">
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+        <span>¿En crisis o angustia intensa? Llama gratis al <strong>113 (Opción 5)</strong> - MINSA.</span>
+      </div>
+      <a href="tel:113" class="font-bold underline text-rose-700 hover:text-rose-900">Salud UCV</a>
     </div>
   </footer>
 
-  <!-- Script de Conexión a Supabase y Lógica -->
+  <!-- Lógica Interactiva y Conexión Supabase -->
   <script>
-    // Enlace de tu proyecto creado en Supabase
+    // Conexión Supabase
     const SUPABASE_URL = 'https://idfhlvwwhltkmklucsts.supabase.co';
-    // PEGA AQUÍ TU CLAVE anon public DE SUPABASE (Project Settings > API)
-    const SUPABASE_ANON_KEY = 'const SUPABASE_ANON_KEY = 'eyJh...tu_clave_larga_aqui...';';
+    // Pega tu clave pública anon de Supabase aquí
+    const SUPABASE_ANON_KEY = 'AQUI_PEGAS_TU_CLAVE_ANON_PUBLIC';
 
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Animación 4-7-8
-    let breathTimer = null;
-    function startBreathing() {
-      const circle = document.getElementById('circle');
-      const text = document.getElementById('instructionText');
-      const timer = document.getElementById('timerText');
-      circle.classList.add('animating-breath');
+    // ==========================================
+    // EJERCICIO RESPIRATORIO 4-7-8 CON CUENTA REGRESIVA
+    // ==========================================
+    let breathInterval = null;
+    let breathTimeout = null;
+    let isRunning = false;
 
-      function cycle() {
-        text.innerText = "Inhala (4s)";
-        timer.innerText = "Toma aire profundamente por la nariz";
-        setTimeout(() => {
-          if (!circle.classList.contains('animating-breath')) return;
-          text.innerText = "Retén (7s)";
-          timer.innerText = "Mantén la respiración en calma";
-          setTimeout(() => {
-            if (!circle.classList.contains('animating-breath')) return;
-            text.innerText = "Exhala (8s)";
-            timer.innerText = "Suelta todo el aire por la boca";
-          }, 7000);
-        }, 4000);
+    function startBreathingCycle() {
+      if (isRunning) return;
+      isRunning = true;
+
+      const circle = document.getElementById('breathCircle');
+      const phase = document.getElementById('breathPhase');
+      const count = document.getElementById('breathCount');
+      const tip = document.getElementById('breathTip');
+
+      function countdown(seconds, callback) {
+        let current = seconds;
+        count.innerText = current + "s";
+        breathInterval = setInterval(() => {
+          current--;
+          if (current > 0) {
+            count.innerText = current + "s";
+          } else {
+            clearInterval(breathInterval);
+            if (callback) callback();
+          }
+        }, 1000);
       }
 
-      cycle();
-      breathTimer = setInterval(cycle, 19000);
+      function stepInhale() {
+        if (!isRunning) return;
+        circle.className = "w-40 h-40 rounded-full flex flex-col items-center justify-center transition-all duration-[4000ms] ease-in-out circle-expand";
+        phase.innerText = "Inhala";
+        tip.innerText = "Toma aire profundo por la nariz...";
+        countdown(4, stepHold);
+      }
+
+      function stepHold() {
+        if (!isRunning) return;
+        circle.className = "w-40 h-40 rounded-full flex flex-col items-center justify-center transition-all duration-500 ease-in-out circle-hold";
+        phase.innerText = "Retén";
+        tip.innerText = "Sostén el aire, relaja tus hombros...";
+        countdown(7, stepExhale);
+      }
+
+      function stepExhale() {
+        if (!isRunning) return;
+        circle.className = "w-40 h-40 rounded-full flex flex-col items-center justify-center transition-all duration-[8000ms] ease-in-out circle-shrink";
+        phase.innerText = "Exhala";
+        tip.innerText = "Suelta el aire lentamente por la boca...";
+        countdown(8, () => {
+          if (isRunning) stepInhale();
+        });
+      }
+
+      stepInhale();
     }
 
-    function stopBreathing() {
-      clearInterval(breathTimer);
-      const circle = document.getElementById('circle');
-      circle.classList.remove('animating-breath');
-      document.getElementById('instructionText').innerText = "Listo";
-      document.getElementById('timerText').innerText = "Ciclo detenido";
+    function stopBreathingCycle() {
+      isRunning = false;
+      clearInterval(breathInterval);
+      clearTimeout(breathTimeout);
+      const circle = document.getElementById('breathCircle');
+      circle.className = "w-40 h-40 rounded-full bg-teal-100 border-4 border-teal-400 flex flex-col items-center justify-center transition-all duration-500 circle-shrink";
+      document.getElementById('breathPhase').innerText = "Listo";
+      document.getElementById('breathCount').innerText = "4-7-8";
+      document.getElementById('breathTip').innerText = "Ciclo pausado. Vuelve a iniciar cuando gustes.";
     }
 
-    // Cargar los últimos registros guardados en la tabla 'registros'
-    async function loadEntries() {
-      const listContainer = document.getElementById('entriesList');
+    // ==========================================
+    // PAISAJE SONORO (WEBAUDIO NATIVO)
+    // ==========================================
+    let audioCtx = null;
+    let noiseNode = null;
+    let activeType = null;
+
+    function toggleNoise(type) {
+      if (activeType === type) {
+        stopNoise();
+        return;
+      }
+      stopNoise();
+      activeType = type;
+
+      const btnRain = document.getElementById('soundRain');
+      const btnOcean = document.getElementById('soundOcean');
+
+      if (type === 'rain') btnRain.classList.add('bg-teal-100', 'border-teal-400', 'text-teal-800');
+      if (type === 'ocean') btnOcean.classList.add('bg-teal-100', 'border-teal-400', 'text-teal-800');
+
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const bufferSize = audioCtx.sampleRate * 2;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+
+      const whiteNoise = audioCtx.createBufferSource();
+      whiteNoise.buffer = noiseBuffer;
+      whiteNoise.loop = true;
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = type === 'rain' ? 'lowpass' : 'bandpass';
+      filter.frequency.value = type === 'rain' ? 800 : 450;
+
+      const gain = audioCtx.createGain();
+      gain.gain.value = 0.05;
+
+      whiteNoise.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+      whiteNoise.start();
+      noiseNode = whiteNoise;
+    }
+
+    function stopNoise() {
+      if (noiseNode) {
+        noiseNode.stop();
+        noiseNode.disconnect();
+        noiseNode = null;
+      }
+      activeType = null;
+      document.getElementById('soundRain').classList.remove('bg-teal-100', 'border-teal-400', 'text-teal-800');
+      document.getElementById('soundOcean').classList.remove('bg-teal-100', 'border-teal-400', 'text-teal-800');
+    }
+
+    // ==========================================
+    // VACIADO MENTAL & SUPABASE
+    // ==========================================
+    function setQuickTopic(text) {
+      document.getElementById('inputNota').value = text;
+    }
+
+    async function loadFeed() {
+      const feed = document.getElementById('entriesFeed');
       try {
         const { data, error } = await supabaseClient
           .from('registros')
           .select('id, nombre, animo, nota, created_at')
           .order('created_at', { ascending: false })
-          .limit(5);
+          .limit(4);
 
         if (error) throw error;
-
         if (!data || data.length === 0) {
-          listContainer.innerHTML = '<p class="text-xs text-slate-400 italic">No hay notas registradas todavía.</p>';
+          feed.innerHTML = '<p class="text-xs text-slate-400 italic">No hay notas todavía. Sé el primero en desahogar un pendiente.</p>';
           return;
         }
 
-        listContainer.innerHTML = data.map(item => `
-          <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs">
-            <div class="flex justify-between items-center text-slate-500 mb-1">
+        const emojis = { 1: "😫", 2: "😟", 3: "😐", 4: "🙂", 5: "😌" };
+
+        feed.innerHTML = data.map(item => `
+          <div class="bg-slate-50/80 p-3 rounded-xl border border-slate-100 text-xs flex justify-between items-start gap-2">
+            <div>
               <span class="font-bold text-slate-700">${escapeHtml(item.nombre)}</span>
-              <span class="bg-teal-50 text-teal-700 px-2 py-0.5 rounded border border-teal-100 font-semibold">Calma: ${item.animo}/5</span>
+              <p class="text-slate-500 mt-0.5 leading-relaxed">${escapeHtml(item.nota || 'Soltando tensión...')}</p>
             </div>
-            <p class="text-slate-600">${escapeHtml(item.nota || 'Liberando tensión...')}</p>
+            <span class="px-2 py-0.5 rounded-lg bg-white border border-slate-200 text-slate-600 font-bold shrink-0">
+              ${emojis[item.animo] || '🌱'} ${item.animo}/5
+            </span>
           </div>
         `).join('');
       } catch (err) {
-        listContainer.innerHTML = '<p class="text-xs text-slate-400">Introduce tu anon key para sincronizar registros.</p>';
+        feed.innerHTML = '<p class="text-xs text-slate-400">Verifica tu Supabase Anon Key para cargar registros en vivo.</p>';
       }
     }
 
-    // Insertar registro en la tabla
-    async function saveEntry(e) {
+    async function submitEntry(e) {
       e.preventDefault();
-      const btn = document.getElementById('btnSubmit');
-      const status = document.getElementById('statusMsg');
+      const btn = document.getElementById('btnSubmitForm');
+      const alert = document.getElementById('statusAlert');
       const nombre = document.getElementById('inputNombre').value.trim();
       const nota = document.getElementById('inputNota').value.trim();
       const animo = parseInt(document.querySelector('input[name="animo"]:checked').value);
 
       btn.disabled = true;
-      btn.innerText = "Guardando...";
-      status.classList.add('hidden');
+      btn.innerText = "Liberando...";
+      alert.classList.add('hidden');
 
       try {
         const { error } = await supabaseClient
@@ -220,16 +382,16 @@
 
         if (error) throw error;
 
-        status.innerText = "✓ Registro guardado correctamente en Supabase.";
-        status.className = "mt-3 text-center text-xs font-bold text-teal-600 block";
+        alert.innerText = "✓ Registro guardado y liberado.";
+        alert.className = "mt-3 text-center text-xs font-bold text-teal-600 block";
         document.getElementById('mentalForm').reset();
-        loadEntries();
+        loadFeed();
       } catch (err) {
-        status.innerText = "Error al guardar. Revisa que tu clave anon key sea válida.";
-        status.className = "mt-3 text-center text-xs font-bold text-rose-600 block";
+        alert.innerText = "Error de conexión. Revisa que tu Anon Key de Supabase esté pegada.";
+        alert.className = "mt-3 text-center text-xs font-bold text-rose-600 block";
       } finally {
         btn.disabled = false;
-        btn.innerText = "Guardar y Liberar";
+        btn.innerText = "Guardar y Liberar Mente";
       }
     }
 
@@ -239,7 +401,7 @@
       return div.innerHTML;
     }
 
-    window.onload = loadEntries;
+    window.onload = loadFeed;
   </script>
 </body>
 </html>
