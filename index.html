@@ -13,6 +13,13 @@
     table { margin: 32px auto 0; border-collapse: collapse; font-size: 1rem; text-align: left; background: #ffffff; }
     th, td { padding: 10px 14px; border-bottom: 1px solid #d5dde6; }
     th { background: #051c2c; color: #ffffff; }
+    h2 { color: #051c2c; margin-top: 48px; }
+    form { max-width: 420px; margin: 0 auto; text-align: left; display: grid; gap: 14px; }
+    form label { display: grid; gap: 6px; font-weight: bold; }
+    form input[type=text], form textarea { font: inherit; font-weight: normal; padding: 10px; border: 1px solid #b8c4d0; border-radius: 6px; }
+    form textarea { min-height: 90px; resize: vertical; }
+    form button { justify-self: center; padding: 12px 32px; font: inherit; color: #ffffff; background: #1e6fd9; border: none; border-radius: 8px; cursor: pointer; }
+    #mensaje { min-height: 1.2em; text-align: center; margin: 0; }
   </style>
 </head>
 <body>
@@ -41,9 +48,96 @@
       <tr><td>Daniel Kahneman</td><td>Israel / EE. UU.</td><td>1934–2024</td><td>Sesgos cognitivos y economía conductual; Nobel de Economía 2002</td></tr>
     </tbody>
   </table>
+  <h2>Registro de ánimo</h2>
+  <form id="formulario-animo">
+    <label>Nombre ficticio
+      <input type="text" id="nombre" maxlength="60" required>
+    </label>
+    <label>Estado de ánimo (1 a 15): <span id="animo-valor">8</span>
+      <input type="range" id="animo" min="1" max="15" value="8">
+    </label>
+    <label>Nota
+      <textarea id="nota" maxlength="500"></textarea>
+    </label>
+    <button type="submit">Enviar</button>
+    <p id="mensaje" role="status"></p>
+  </form>
+  <h2>Registros</h2>
+  <table>
+    <thead>
+      <tr><th>Nombre</th><th>Ánimo</th><th>Nota</th><th>Fecha</th></tr>
+    </thead>
+    <tbody id="cuerpo-registros"></tbody>
+  </table>
   <button class="boton-comenzar">Comenzar</button>
   <script>
     document.getElementById('fecha-actual').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Pega aquí la URL y la clave "anon public" de tu proyecto (Supabase > Project Settings > API)
+    const SUPABASE_URL = 'https://idfhlvwwhltkmklucsts.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_AQY8EFBqB_CmXR2OM9vsrw_wQHhtbNG';
+    const configurado = !SUPABASE_URL.includes('TU-PROYECTO');
+    const db = configurado ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    const form = document.getElementById('formulario-animo');
+    const nombre = document.getElementById('nombre');
+    const nota = document.getElementById('nota');
+    const rango = document.getElementById('animo');
+    const valor = document.getElementById('animo-valor');
+    const mensaje = document.getElementById('mensaje');
+    const cuerpoLista = document.getElementById('cuerpo-registros');
+
+    function mostrarMensaje(texto, esError) {
+      mensaje.textContent = texto;
+      mensaje.style.color = esError ? '#b00020' : '#1e6fd9';
+    }
+
+    function filaRegistro(r) {
+      const tr = document.createElement('tr');
+      [r.nombre, r.animo, r.nota || '', new Date(r.created_at).toLocaleString('es-ES')].forEach(texto => {
+        const td = document.createElement('td');
+        td.textContent = texto;
+        tr.appendChild(td);
+      });
+      return tr;
+    }
+
+    async function cargarRegistros() {
+      const { data, error } = await db.from('registros')
+        .select('nombre, animo, nota, created_at')
+        .order('created_at', { ascending: false })
+        .limit(50);
+      if (error) return mostrarMensaje('No se pudo cargar la lista: ' + error.message, true);
+      cuerpoLista.replaceChildren(...data.map(filaRegistro));
+    }
+
+    rango.addEventListener('input', () => { valor.textContent = rango.value; });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!db) return mostrarMensaje('Falta configurar Supabase (URL y clave).', true);
+
+      const { error } = await db.from('registros').insert({
+        nombre: nombre.value.trim(),
+        animo: Number(rango.value),
+        nota: nota.value.trim() || null
+      });
+      if (error) return mostrarMensaje('No se pudo guardar: ' + error.message, true);
+
+      mostrarMensaje('¡Registro guardado!', false);
+      form.reset();
+      rango.value = 8;
+      valor.textContent = '8';
+      cargarRegistros();
+    });
+
+    if (db) {
+      cargarRegistros();
+    } else {
+      mostrarMensaje('Falta configurar Supabase (URL y clave) para guardar y ver registros.', true);
+    }
   </script>
 </body>
 </html>
